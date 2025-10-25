@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Society of Women in Research</title>
+  <title>SWIR</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
-      background: lavenderblush;
+      background: lavender;
       color: #333;
       text-align: center;
       padding-top: 100px;
     }
-    h1 { color: purple; }
+    a {
+      color: purple;
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <h1>whee</h1>
+  <h1>Projects whee</h1>
+  <p>This is my third page!</p>
+  <p><a href="index.html">← Back to Home</a></p>
 </body>
 </html>
