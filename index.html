@@ -3,59 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello from Roya</title>
+  <title>Hi, I'm Roya</title>
   <style>
     /* ---------- Reset & Body ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: system-ui, sans-serif;
       background: lavenderblush;
       color: #333;
-      text-align: center;
-      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* ---------- NAVBAR ---------- */
     nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: white;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
       padding: 0.75rem 1.5rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
       z-index: 100;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-    }
-
-    /* --- ℝ^α Logo --- */
-    .symbol-logo {
-      font-size: 1.8rem;
-      color: #002b7f; /* dark academic blue */
-      font-weight: 700;
-      font-family: "Times New Roman", serif;
-      vertical-align: middle;
-    }
-    .symbol-logo sup {
-      font-size: 0.6em;
-      color: #0044cc; /* slightly lighter blue for alpha */
-      margin-left: 0.05em;
-    }
-
-    .name {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: purple;
+      transition: top 0.4s ease;
     }
 
     .logo-link {
@@ -64,94 +36,159 @@
       gap: 0.3rem;
       text-decoration: none;
     }
-    .logo-link:hover .symbol-logo {
-      color: #0033aa;
+    .symbol-logo {
+      font-size: 1.8rem;
+      color: #002b7f;
+      font-weight: 700;
+      font-family: "Times New Roman", serif;
     }
+    .symbol-logo sup {
+      font-size: 0.6em;
+      color: #0044cc;
+      margin-left: 0.05em;
+    }
+    .name { font-size: 1.1rem; font-weight: 600; color: purple; }
 
-    /* --- Navbar Links --- */
+    /* --- Navbar menu --- */
     .nav-links {
-      display: flex;
-      gap: 1rem;
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 1rem;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(6px);
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      overflow: hidden;
+      transition: opacity 0.3s ease;
     }
-
     .nav-links a {
       color: #444;
       text-decoration: none;
+      padding: 0.8rem 1.5rem;
       font-weight: 500;
-      transition: color 0.2s ease;
+      display: block;
     }
+    .nav-links a:hover { background: lavender; color: purple; }
 
-    .nav-links a:hover {
-      color: purple;
-    }
-
-    /* ---------- MOBILE MENU ---------- */
     .menu-toggle {
-      display: none;
-      flex-direction: column;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
-
     .menu-toggle span {
-      height: 3px;
-      width: 25px;
-      background: #333;
-      margin: 4px 0;
-      border-radius: 2px;
+      height: 3px; width: 25px;
+      background: #333; border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .nav-links.active { display: flex; animation: fadeIn 0.4s forwards; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 700px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background: white;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 100%;
-        padding: 1rem 0;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: flex;
-      }
+    /* ---------- INTRO SECTION ---------- */
+    .intro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding-top: 100px;
+      animation: fadeUp 1s ease-in;
     }
 
-    /* ---------- MAIN CONTENT ---------- */
-    main {
-      padding: 120px 1rem;
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    h1 {
-      color: purple;
+    .intro img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       margin-bottom: 1rem;
+      transition: transform 0.3s ease;
     }
 
-    p {
-      margin: 0.5rem 0;
+    .intro img:hover { transform: scale(1.05); }
+
+    .intro h1 {
+      font-size: 2rem;
+      color: purple;
+      margin-bottom: 0.5rem;
+    }
+    .intro p {
+      color: #333;
+      font-size: 1rem;
+      max-width: 500px;
+    }
+
+    /* ---------- COLLAGE SECTION ---------- */
+    .collage {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      padding: 2rem;
+    }
+
+    .collage a {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .collage a img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.4s ease;
+    }
+
+    .collage a:hover img {
+      transform: scale(1.08);
+      filter: brightness(80%);
+    }
+
+    .collage a::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      color: white;
+      background: rgba(0,0,0,0.4);
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    @media (min-width: 900px) {
+      .intro h1 { font-size: 2.5rem; }
     }
   </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <nav>
-    <div class="logo-area">
-      <a href="index.html" class="logo-link">
-        <span class="symbol-logo">ℝ<sup>α</sup></span>
-        <span class="name">Roya Akrami</span>
-      </a>
-    </div>
+  <nav id="navbar">
+    <a href="index.html" class="logo-link">
+      <span class="symbol-logo">ℝ<sup>α</sup></span>
+      <span class="name">Roya Akrami</span>
+    </a>
     <div class="menu-toggle" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
     <div class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="projects.html">Projects</a>
       <a href="CV.html">CV</a>
@@ -160,17 +197,42 @@
     </div>
   </nav>
 
-  <!-- MAIN SECTION -->
-  <main>
-    <h1>Welcome to my site 💜</h1>
-    <p>This page is hosted using GitHub Pages!</p>
-  </main>
+  <!-- INTRO -->
+  <section class="intro">
+    <img src="me.png" alt="Photo of Roya">
+    <h1>Hi, I'm Roya 💜</h1>
+    <p>Welcome to my little corner of the internet — explore my projects, research, and more below.</p>
+  </section>
+
+  <!-- COLLAGE -->
+  <section class="collage">
+    <a href="about.html" data-label="About Me"><img src="images/about.jpg" alt="About"></a>
+    <a href="projects.html" data-label="Projects"><img src="images/projects.jpg" alt="Projects"></a>
+    <a href="CV.html" data-label="CV"><img src="images/cv.jpg" alt="CV"></a>
+    <a href="society-of-women-in-research.html" data-label="SWIR"><img src="images/swir.jpg" alt="SWIR"></a>
+    <a href="resume.html" data-label="Resume"><img src="images/resume.jpg" alt="Resume"></a>
+  </section>
 
   <script>
+    // Navbar toggle for mobile
     function toggleMenu() {
       document.getElementById("navLinks").classList.toggle("active");
+    }
+
+    // Hide navbar when scrolling down, show when scrolling up
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+      const navbar = document.getElementById("navbar");
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        navbar.style.top = "0";
+      } else {
+        navbar.style.top = "-70px";
+      }
+      prevScrollpos = currentScrollPos;
     }
   </script>
 
 </body>
 </html>
+
