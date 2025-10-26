@@ -1,27 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects</title>
   <style>
+    /* ---------- Reset & Body ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: system-ui, sans-serif;
-      background: lavender;
+      background: lavenderblush;
       color: #333;
       text-align: center;
-      padding-top: 100px;
+      min-height: 100vh;
     }
-    a {
+
+    /* ---------- NAVBAR ---------- */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      padding: 0.75rem 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    /* --- ℝ^α Logo --- */
+    .symbol-logo {
+      font-size: 1.8rem;
+      color: #002b7f; /* dark academic blue */
+      font-weight: 700;
+      font-family: "Times New Roman", serif;
+      vertical-align: middle;
+    }
+    .symbol-logo sup {
+      font-size: 0.6em;
+      color: #0044cc; /* slightly lighter blue for alpha */
+      margin-left: 0.05em;
+    }
+
+    .name {
+      font-size: 1.1rem;
+      font-weight: 600;
       color: purple;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: baseline;
+      gap: 0.3rem;
       text-decoration: none;
     }
-    a:hover { text-decoration: underline; }
+    .logo-link:hover .symbol-logo {
+      color: #0033aa;
+    }
+
+    /* --- Navbar Links --- */
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      color: #444;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: purple;
+    }
+
+    /* ---------- MOBILE MENU ---------- */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #333;
+      margin: 4px 0;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 700px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: white;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        padding: 1rem 0;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    /* ---------- MAIN CONTENT ---------- */
+    main {
+      padding: 120px 1rem;
+    }
+
+    h1 {
+      color: purple;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin: 0.5rem 0;
+    }
   </style>
 </head>
 <body>
-  <h1>Projects whee</h1>
-  <p>This is my third page!</p>
-  <p><a href="index.html">← Back to Home</a></p>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo-area">
+      <a href="index.html" class="logo-link">
+        <span class="symbol-logo">ℝ<sup>α</sup></span>
+        <span class="name">Roya Akrami</span>
+      </a>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="CV.html">CV</a>
+      <a href="society-of-women-in-research.html">SWIR</a>
+      <a href="resume.html">Resume</a>
+    </div>
+  </nav>
+
+  <!-- MAIN SECTION -->
+  <main>
+    <h1>Projects 💜</h1>
+    <p>This page is hosted using GitHub Pages!</p>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("active");
+    }
+  </script>
+
 </body>
 </html>
