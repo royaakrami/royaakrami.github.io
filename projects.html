@@ -3,155 +3,233 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects</title>
+  <title>Projects | Roya Akrami</title>
   <style>
     /* ---------- Reset & Body ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: system-ui, sans-serif;
-      background: lavenderblush;
-      color: #333;
-      text-align: center;
-      min-height: 100vh;
+      font-family: "Times New Roman", serif;
+      background: black;
+      color: #ddd;
+      overflow-x: hidden;
     }
 
     /* ---------- NAVBAR ---------- */
     nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: white;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
       padding: 0.75rem 1.5rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
+      box-shadow: 0 2px 6px rgba(255,255,255,0.1);
       z-index: 100;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-    }
-
-    /* --- ℝ^α Logo --- */
-    .symbol-logo {
-      font-size: 1.8rem;
-      color: #002b7f; /* dark academic blue */
-      font-weight: 700;
+      transition: top 0.4s ease;
       font-family: "Times New Roman", serif;
-      vertical-align: middle;
     }
-    .symbol-logo sup {
-      font-size: 0.6em;
-      color: #0044cc; /* slightly lighter blue for alpha */
-      margin-left: 0.05em;
-    }
-
-    .name {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: purple;
-    }
-
     .logo-link {
       display: flex;
       align-items: baseline;
       gap: 0.3rem;
       text-decoration: none;
     }
-    .logo-link:hover .symbol-logo {
-      color: #0033aa;
+    .symbol-logo {
+      font-size: 1.8rem;
+      color: #80aaff;
+      font-weight: 700;
+      font-family: "Times New Roman", serif;
     }
+    .symbol-logo sup {
+      font-size: 0.6em;
+      color: #6699ff;
+      margin-left: 0.05em;
+    }
+    .name { font-size: 1.1rem; font-weight: 600; color: #b19cd9; }
 
-    /* --- Navbar Links --- */
     .nav-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .nav-links a {
-      color: #444;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: purple;
-    }
-
-    /* ---------- MOBILE MENU ---------- */
-    .menu-toggle {
       display: none;
       flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 1rem;
+      background: rgba(30,30,30,0.95);
+      backdrop-filter: blur(6px);
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      overflow: hidden;
+      transition: opacity 0.3s ease;
+    }
+    .nav-links a {
+      color: #ddd;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      font-weight: 500;
+      display: block;
+    }
+    .nav-links a:hover { background: #222; color: #b19cd9; }
+
+    .menu-toggle {
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
-
     .menu-toggle span {
-      height: 3px;
-      width: 25px;
-      background: #333;
-      margin: 4px 0;
-      border-radius: 2px;
+      height: 2px; width: 25px;
+      background: #ccc; border-radius: 0px;
+      transition: all 0.3s ease;
+    }
+    .nav-links.active { display: flex; animation: fadeIn 0.4s forwards; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 700px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background: white;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 100%;
-        padding: 1rem 0;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    /* ---------- PAGE HEADER ---------- */
+    .header {
+      padding-top: 120px;
+      text-align: center;
+      color: #e6f2ff;
+      padding-bottom: 10px;
+    }
+    .header h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #b19cd9, #80aaff, #b19cd9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header p {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+      color: #ddd;
+      opacity: 0.95;
+    }
+
+    /* ---------- PROJECT LIST ---------- */
+    .projects {
+      max-width: 1000px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      align-items: start;
+      padding: 1.25rem;
+      margin: 1.25rem 0;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      box-shadow: 0 6px 18px rgba(255,255,255,0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(255,255,255,0.15);
+      border-color: rgba(177,156,217,0.35);
+    }
+
+    .project-media img, .project-media video {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 6px 18px rgba(255,255,255,0.15);
+    }
+
+    .project-body h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.4rem;
+      background: linear-gradient(90deg, #b19cd9, #80aaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .project-meta {
+      font-size: 0.95rem;
+      color: #b3d9ff;
+      margin-bottom: 0.6rem;
+    }
+    .project-desc {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #e6e6e6;
+    }
+
+    .project-links {
+      margin-top: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .project-links a {
+      display: inline-block;
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(128,170,255,0.6);
+      color: #80aaff;
+      font-size: 0.95rem;
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .project-links a:hover {
+      background: rgba(128,170,255,0.12);
+      color: #b19cd9;
+      border-color: rgba(177,156,217,0.8);
+    }
+
+    /* Responsive: media left / text right on wider screens */
+    @media (min-width: 820px) {
+      .project-card {
+        grid-template-columns: 1.2fr 1.6fr;
       }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: flex;
-      }
     }
 
-    /* ---------- MAIN CONTENT ---------- */
-    main {
-      padding: 120px 1rem;
+    /* ---------- OPTIONAL TAGS / FILTER ROW ---------- */
+    .filters {
+      max-width: 1000px;
+      margin: 1rem auto 0.5rem;
+      padding: 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
     }
-
-    h1 {
-      color: purple;
-      margin-bottom: 1rem;
+    .filters a {
+      text-decoration: none;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #ddd;
+      font-size: 0.9rem;
     }
-
-    p {
-      margin: 0.5rem 0;
+    .filters a:hover {
+      color: #b19cd9;
+      border-color: rgba(177,156,217,0.6);
     }
   </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <nav>
-    <div class="logo-area">
-      <a href="index.html" class="logo-link">
-        <span class="symbol-logo">ℝ<sup>α</sup></span>
-        <span class="name">Roya Akrami</span>
-      </a>
-    </div>
+  <nav id="navbar">
+    <a href="index.html" class="logo-link">
+      <span class="symbol-logo">ℝ<sup>α</sup></span>
+      <span class="name">Roya Akrami</span>
+    </a>
     <div class="menu-toggle" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
     <div class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="projects.html">Projects</a>
       <a href="CV.html">CV</a>
@@ -160,15 +238,125 @@
     </div>
   </nav>
 
-  <!-- MAIN SECTION -->
-  <main>
-    <h1>Projects 💜</h1>
-    <p>This page is hosted using GitHub Pages!</p>
+  <!-- PAGE HEADER -->
+  <header class="header">
+    <h1>Projects</h1>
+    <p>
+      A selection of work across heliophysics, spectroscopy, embedded systems, and creative tech.
+      Each project card includes a brief overview and space for links to code, papers, or demos.
+    </p>
+  </header>
+
+  <!-- OPTIONAL FILTER SHORTCUTS (anchors to sections or external tags) -->
+  <div class="filters">
+    <a href="#heliophysics">Heliophysics</a>
+    <a href="#ml">ML / Data</a>
+    <a href="#embedded">Embedded</a>
+    <a href="#creative">Creative</a>
+  </div>
+
+  <!-- PROJECT LIST -->
+  <main class="projects">
+
+    <!-- PROJECT 1 -->
+    <article class="project-card" id="heliophysics">
+      <div class="project-media">
+        <img src="images/projects/twins_pipeline.jpg" alt="TWINS data pipeline visualization">
+      </div>
+      <div class="project-body">
+        <h2>Global Exospheric Hydrogen with TWINS</h2>
+        <div class="project-meta">Heliophysics • MATLAB / Python • Spherical Harmonics</div>
+        <p class="project-desc">
+          End-to-end pipeline to ingest TWINS LAD/ORB/ATT data, perform stellar/IPH background modeling,
+          coordinate transforms, and produce global IPH reconstructions. Built data products for ML training and
+          visualized exospheric features across solar wind conditions.
+        </p>
+        <div class="project-links">
+          <a href="#" target="_blank" rel="noopener">GitHub</a>
+          <a href="#" target="_blank" rel="noopener">Poster / Paper</a>
+          <a href="#" target="_blank" rel="noopener">Demo / Gallery</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 2 -->
+    <article class="project-card" id="ml">
+      <div class="project-media">
+        <img src="images/projects/ml_iph.jpg" alt="Neural model predictions on hydrogen intensity">
+      </div>
+      <div class="project-body">
+        <h2>Neural Predictions of IPH Maps</h2>
+        <div class="project-meta">Machine Learning • PyTorch • Time-Series</div>
+        <p class="project-desc">
+          Prepared INPUT/TARGET datasets combining TWINS products with OMNI indices (Kp, Dst, F10.7).
+          Trained and evaluated architectures to forecast hydrogen intensity patterns and analyze links to
+          solar-terrestrial activity.
+        </p>
+        <div class="project-links">
+          <a href="#" target="_blank" rel="noopener">GitHub</a>
+          <a href="#" target="_blank" rel="noopener">Model Card</a>
+          <a href="#" target="_blank" rel="noopener">Results Gallery</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 3 -->
+    <article class="project-card" id="embedded">
+      <div class="project-media">
+        <img src="images/projects/embedded_ir.jpg" alt="PIC18 IR transceiver project">
+      </div>
+      <div class="project-body">
+        <h2>PIC18 IR Transceiver & ASCII Protocol</h2>
+        <div class="project-meta">Embedded Systems • C (MPLAB X) • Interrupts</div>
+        <p class="project-desc">
+          Designed a minimalist IR link with custom start/data/stop framing, RX/TX state machines, and
+          checksum validation. Implemented timer-driven bit periods, buffering, and pretty console decoding.
+        </p>
+        <div class="project-links">
+          <a href="#" target="_blank" rel="noopener">GitHub</a>
+          <a href="#" target="_blank" rel="noopener">Lab Write-up</a>
+          <a href="#" target="_blank" rel="noopener">Demo Video</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 4 -->
+    <article class="project-card" id="creative">
+      <div class="project-media">
+        <img src="images/projects/creative_site.jpg" alt="Personal site and SWIR branding mockups">
+      </div>
+      <div class="project-body">
+        <h2>Personal Site & SWIR Branding</h2>
+        <div class="project-meta">Web • HTML/CSS • Identity</div>
+        <p class="project-desc">
+          A cohesive personal site (this!) and a simple brand kit for the Society of Women in Research:
+          accessible color palette, classic typography, and clean layouts that foreground content and community.
+        </p>
+        <div class="project-links">
+          <a href="society-of-women-in-research.html">SWIR Page</a>
+          <a href="#" target="_blank" rel="noopener">Design Notes</a>
+        </div>
+      </div>
+    </article>
+
   </main>
 
   <script>
     function toggleMenu() {
       document.getElementById("navLinks").classList.toggle("active");
+    }
+
+    // Hide-on-scroll navbar (matches index)
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+      const navbar = document.getElementById("navbar");
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        navbar.style.top = "0";
+      } else {
+        navbar.style.top = "-70px";
+      }
+      prevScrollpos = currentScrollPos;
     }
   </script>
 
