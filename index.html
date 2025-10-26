@@ -90,16 +90,30 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* ---------- HEADER DECOR BAND ---------- */
+    .header-decor {
+      position: absolute;
+      top: 70px;              /* just below the navbar */
+      left: 0;
+      width: 100%;
+      height: 250px;          /* adjust how tall your rectangle should be */
+      background: url("images/header_design.png") center/cover no-repeat;
+      opacity: 0.9;           /* softer overlay effect */
+      z-index: 1;
+    }
+
     /* ---------- INTRO SECTION ---------- */
     .intro {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       text-align: center;
-      padding-top: 100px;
+      padding-top: 160px;
       animation: fadeUp 1s ease-in;
+      z-index: 2;
     }
 
     @keyframes fadeUp {
@@ -111,7 +125,7 @@
     .intro img {
       width: 260px;
       height: 260px;
-      border-radius: 16px;              /* soft rounded square */
+      border-radius: 16px; /* soft rounded square */
       object-fit: cover;
       border: 5px solid white;
       box-shadow: 0 6px 18px rgba(0,0,0,0.25);
@@ -200,6 +214,9 @@
       <a href="resume.html">Resume</a>
     </div>
   </nav>
+
+  <!-- HEADER DECOR BAND -->
+  <div class="header-decor"></div>
 
   <!-- INTRO -->
   <section class="intro">
