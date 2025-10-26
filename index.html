@@ -34,23 +34,41 @@
 
     .logo-area {
       display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      align-items: baseline;
+      gap: 0.5rem;
     }
 
-    .logo-area img {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      object-fit: cover;
+    /* --- ℝ^α Logo --- */
+    .symbol-logo {
+      font-size: 1.8rem;
+      color: #002b7f; /* dark academic blue */
+      font-weight: 700;
+      font-family: "Times New Roman", serif;
+      vertical-align: middle;
+    }
+    .symbol-logo sup {
+      font-size: 0.6em;
+      color: #0044cc; /* slightly lighter blue for alpha */
+      margin-left: 0.05em;
     }
 
-    .logo-area span {
+    .name {
+      font-size: 1.1rem;
       font-weight: 600;
       color: purple;
-      font-size: 1.1rem;
     }
 
+    .logo-link {
+      display: flex;
+      align-items: baseline;
+      gap: 0.3rem;
+      text-decoration: none;
+    }
+    .logo-link:hover .symbol-logo {
+      color: #0033aa;
+    }
+
+    /* --- Navbar Links --- */
     .nav-links {
       display: flex;
       gap: 1rem;
@@ -124,8 +142,10 @@
   <!-- NAVBAR -->
   <nav>
     <div class="logo-area">
-      <img src="images/logo.png" alt="Logo">
-      <span>Roya Akrami</span>
+      <a href="index.html" class="logo-link">
+        <span class="symbol-logo">ℝ<sup>α</sup></span>
+        <span class="name">Roya Akrami</span>
+      </a>
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">
       <span></span><span></span><span></span>
