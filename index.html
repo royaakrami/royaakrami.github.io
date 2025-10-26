@@ -107,18 +107,22 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* --- Roya photo as square card --- */
     .intro img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
+      width: 260px;
+      height: 260px;
+      border-radius: 16px;              /* soft rounded square */
       object-fit: cover;
-      border: 4px solid white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      margin-bottom: 1rem;
-      transition: transform 0.3s ease;
+      border: 5px solid white;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      margin-bottom: 1.2rem;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
-    .intro img:hover { transform: scale(1.05); }
+    .intro img:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
 
     .intro h1 {
       font-size: 2rem;
@@ -235,4 +239,3 @@
 
 </body>
 </html>
-
