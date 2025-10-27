@@ -247,6 +247,23 @@
       /* hide floating cards on small screens */
       .left-collage, .right-collage { display: none; }
     }
+/* === OVERRIDES: push orbit cards much farther from center (desktop only) === */
+@media (min-width: 821px) {
+  .intro, .intro-split, .left-collage, .right-collage { overflow: visible; }
+  .left-collage, .right-collage { z-index: 3; }
+
+  /* (optional) bigger tiles */
+  .orbit-card { width: 180px; height: 130px; border-radius: 18px; }
+
+  /* LEFT of photo (“Hi,” side) */
+  .oc-resume   { top: -6%;  right: -42%; }
+  .oc-projects { bottom: -6%; left:  -38%; }
+
+  /* RIGHT of photo (“I'm / Roya” side) */
+  .oc-about  { top: -2%;  right: -30%; }
+  .oc-cv     { bottom: -8%; right: -46%; }
+  .oc-swir   { top: 38%;  right: -34%; }
+}
 
     /* ---------- Navbar hide-on-scroll ---------- */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
