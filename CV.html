@@ -1,23 +1,178 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV</title>
+  <title>CV | Roya Akrami</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    /* ---------- Reset & Body ---------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: system-ui, sans-serif;
-      background: lavenderblush;
-      color: #333;
-      text-align: center;
-      padding-top: 100px;
+      font-family: 'Open Sans', sans-serif;
+      background: black;
+      color: #fff;
+      overflow-x: hidden;
     }
-    h1 { color: purple; }
+
+    /* ---------- NAVBAR (glowy white) ---------- */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      padding: 0.75rem 1.5rem;
+      box-shadow: 0 2px 6px rgba(255,255,255,0.1);
+      z-index: 100;
+      transition: top 0.4s ease;
+    }
+    .logo-link { display: flex; align-items: baseline; gap: 0.3rem; text-decoration: none; }
+    .symbol-logo, .symbol-logo sup, .name {
+      color: #ffffff !important;
+      text-shadow: 0 0 6px rgba(255,255,255,0.6);
+      font-weight: 700;
+    }
+    .symbol-logo { font-size: 1.8rem; }
+    .symbol-logo sup { font-size: 0.6em; margin-left: 0.05em; }
+    .name { font-size: 1.1rem; font-weight: 600; }
+
+    .nav-links {
+      display: none; flex-direction: column; position: absolute; top: 60px; right: 1rem;
+      background: rgba(30,30,30,0.95); backdrop-filter: blur(6px); border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5); overflow: hidden; transition: opacity 0.3s ease;
+    }
+    .nav-links a {
+      color: #ffffff; text-decoration: none; padding: 0.8rem 1.5rem; font-weight: 500; display: block;
+      text-shadow: 0 0 6px rgba(255,255,255,0.45);
+    }
+    .nav-links a:hover { background: #222; color: #b19cd9; }
+    .menu-toggle { cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
+    .menu-toggle span { height: 2px; width: 25px; background: #ffffff; transition: all 0.3s ease; }
+    .nav-links.active { display: flex; animation: fadeIn 0.4s forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px);} to { opacity: 1; transform: translateY(0);} }
+
+    /* ---------- PAGE HEADER ---------- */
+    header {
+      padding-top: 120px;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #dfe6ff, #a8c6ff, #cfc9ff, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    header p {
+      color: #e9e9e9;
+      margin-top: 0.5rem;
+      opacity: 0.95;
+    }
+
+    /* ---------- PDF ACTIONS ---------- */
+    .pdf-actions {
+      max-width: 1100px;
+      margin: 0.75rem auto 0;
+      display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap;
+      padding: 0 1rem;
+    }
+    .pdf-actions a {
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(128,170,255,0.6);
+      color: #80aaff;
+      font-size: 0.95rem;
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 0 8px rgba(128,170,255,0.25);
+    }
+    .pdf-actions a:hover {
+      background: rgba(128,170,255,0.12);
+      color: #b19cd9;
+      border-color: rgba(177,156,217,0.8);
+      box-shadow: 0 0 14px rgba(177,156,217,0.5);
+    }
+
+    /* ---------- PDF VIEWER ---------- */
+    .pdf-wrap {
+      max-width: 1100px;
+      margin: 0.75rem auto 3rem;
+      padding: 0 1rem;
+    }
+    .pdf-frame {
+      width: 100%;
+      height: 82vh;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      background: #0f0f10;
+      box-shadow: 0 10px 28px rgba(255,255,255,0.08);
+    }
+    @media (max-width: 640px) {
+      .pdf-frame { height: 72vh; }
+    }
   </style>
 </head>
 <body>
-  <h1>Welcome to my site 💜</h1>
-  <p>This page is hosted using GitHub Pages!</p>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="index.html" class="logo-link">
+      <span class="symbol-logo">ℝ<sup>α</sup></span>
+      <span class="name">Roya Akrami</span>
+    </a>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="CV.html">CV</a>
+      <a href="resume.html">Resume</a>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Curriculum Vitae</h1>
+    <p>View or download my latest CV directly on this page.</p>
+  </header>
+
+  <!-- ACTION BUTTONS -->
+  <div class="pdf-actions">
+    <a href="files/Roya%20Akrami%20CV%202025.pdf" target="_blank" rel="noopener">Open in New Tab</a>
+    <a href="files/Roya%20Akrami%20CV%202025.pdf" download>Download PDF</a>
+  </div>
+
+  <!-- PDF VIEWER -->
+  <main class="pdf-wrap">
+    <iframe
+      class="pdf-frame"
+      src="files/Roya%20Akrami%20CV%202025.pdf#toolbar=1&zoom=page-width"
+      title="Roya Akrami CV 2025 (PDF)"
+    ></iframe>
+
+    <div class="pdf-actions" style="margin-top: 0.75rem;">
+      <a href="files/Roya%20Akrami%20CV%202025.pdf" target="_blank" rel="noopener">Having trouble? Open the PDF</a>
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("active");
+    }
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+      const navbar = document.getElementById("navbar");
+      const currentScrollPos = window.pageYOffset;
+      navbar.style.top = (prevScrollpos > currentScrollPos) ? "0" : "-70px";
+      prevScrollpos = currentScrollPos;
+    }
+  </script>
+
 </body>
 </html>
