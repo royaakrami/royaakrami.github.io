@@ -103,7 +103,8 @@
       justify-self: start; /* hug the image */
       align-self: start;
       text-align: left;
-      line-height: 0.95;
+      line-height: 1.05;
+      overflow: visible;
       padding-top: 6px;    /* tiny nudge to match left */
     }
     .right-name .im {
@@ -119,8 +120,13 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: 0.5px;
+      display: inline-block;
+      line-height: 1.1;
+      padding-bottom: 0.12em;
     }
-
+    .intro-split { 
+      overflow: visible; 
+    }
     /* Subcopy under the split */
     .intro-subcopy {
       margin: 1.1rem auto 0;
@@ -140,6 +146,10 @@
       max-width: 680px;
       text-align: center;
     }
+    @media (max-width: 820px) {
+  .right-name { line-height: 1.1; }
+  .right-name .roya { line-height: 1.15; padding-bottom: 0.14em; }
+}
 
     /* ---------- FLOATING SIDE ICONS (unchanged except URL fix) ---------- */
     .float-icons { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
