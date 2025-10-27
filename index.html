@@ -229,7 +229,7 @@ nav {
   pointer-events: auto;
   text-decoration: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-  animation: pulseGlow 5s ease-in-out infinite;
+  animation: pulseGlow 12s ease-in-out infinite;  /* slower glow */
 }
 .float-icon:hover {
   transform: translateY(-6px) scale(1.12);
@@ -240,27 +240,20 @@ nav {
   width: 24px; height: 24px; fill: #ffffff; filter: drop-shadow(0 0 6px #b19cd9);
 }
 
-/* More visible floating animations */
-@keyframes floatY { 
-  0% { transform: translateY(0); } 
-  50% { transform: translateY(-18px); } 
-  100% { transform: translateY(0); } 
-}
-@keyframes floatX { 
-  0% { transform: translateX(0); } 
-  50% { transform: translateX(18px); } 
-  100% { transform: translateX(0); } 
-}
+/* Slower float animations (just longer durations) */
+@keyframes floatY { 0% { transform: translateY(0);} 50% { transform: translateY(-18px);} 100% { transform: translateY(0);} }
+@keyframes floatX { 0% { transform: translateX(0);} 50% { transform: translateX(18px);} 100% { transform: translateX(0);} }
+
 @keyframes pulseGlow {
   0%, 100% { box-shadow: 0 0 12px rgba(177,156,217,0.5), 0 0 30px rgba(177,156,217,0.25); }
   50% { box-shadow: 0 0 20px rgba(177,156,217,0.8), 0 0 45px rgba(177,156,217,0.6); }
 }
 
-/* Repositioned slightly inward */
-.fi-github  { left: 7%; top: 33%;  animation: floatY 6s ease-in-out infinite; }
-.fi-linkedin{ right: 7%; top: 43%; animation: floatX 7s ease-in-out infinite; }
-.fi-email   { left: 7%; bottom: 27%; animation: floatX 6.4s ease-in-out infinite; }
-.fi-resume  { right: 7%; bottom: 20%; animation: floatY 6.8s ease-in-out infinite; }
+/* Same positions, slower cycles */
+.fi-github  { left: 7%; top: 33%;  animation: floatY 14s ease-in-out infinite; }
+.fi-linkedin{ right: 7%; top: 43%; animation: floatX 16s ease-in-out infinite; }
+.fi-email   { left: 7%; bottom: 27%; animation: floatX 15s ease-in-out infinite; }
+.fi-resume  { right: 7%; bottom: 20%; animation: floatY 17s ease-in-out infinite; }
 
 @media (max-width: 760px) {
   .fi-github  { left: 2%; top: auto; bottom: 42%; }
@@ -268,6 +261,15 @@ nav {
   .fi-email   { left: 2%; bottom: 28%; }
   .fi-resume  { right: 2%; bottom: 18%; }
 }
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .float-icon { animation: none !important; }
+  .fi-github, .fi-linkedin, .fi-email, .fi-resume { animation: none !important; }
+}
+
+/* Hide rule (toggled by the switch) */
+.hide-float-icons .float-icons { display: none !important; }
 
     /* ---------- Small screens: stack photo & text ---------- */
     @media (max-width: 1020px) {
