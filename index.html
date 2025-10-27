@@ -9,12 +9,20 @@
   <style>
     /* ---------- Reset & Body ---------- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --text: #fff;
+      --accent-blue: #80aaff;
+      --accent-blue-dim: #6699ff;
+      --accent-purple: #b19cd9;
+      --glass: rgba(255,255,255,0.08);
+    }
     body {
       font-family: 'Open Sans', sans-serif;
       background: black;
-      color: #fff;
+      color: var(--text);
       overflow-x: hidden;
     }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
 
     /* ---------- NAVBAR ---------- */
     nav {
@@ -30,33 +38,17 @@
       box-shadow: 0 2px 6px rgba(255,255,255,0.1);
       z-index: 100;
       transition: top 0.4s ease;
-      font-family: 'Open Sans', sans-serif;
     }
-
-    .logo-link {
-      display: flex;
-      align-items: baseline;
-      gap: 0.3rem;
-      text-decoration: none;
-    }
-    .symbol-logo {
-      font-size: 1.8rem;
-      color: #80aaff;
-      font-weight: 700;
-    }
-    .symbol-logo sup {
-      font-size: 0.6em;
-      color: #6699ff;
-      margin-left: 0.05em;
-    }
-    .name { font-size: 1.1rem; font-weight: 600; color: #b19cd9; }
+    .logo-link { display: flex; align-items: baseline; gap: 0.3rem; text-decoration: none; }
+    .symbol-logo { font-size: 1.8rem; color: var(--accent-blue); font-weight: 700; }
+    .symbol-logo sup { font-size: 0.6em; color: var(--accent-blue-dim); margin-left: 0.05em; }
+    .name { font-size: 1.1rem; font-weight: 600; color: var(--accent-purple); }
 
     .nav-links {
       display: none;
       flex-direction: column;
       position: absolute;
-      top: 60px;
-      right: 1rem;
+      top: 60px; right: 1rem;
       background: rgba(30,30,30,0.95);
       backdrop-filter: blur(6px);
       border-radius: 12px;
@@ -65,39 +57,28 @@
       transition: opacity 0.3s ease;
     }
     .nav-links a {
-      color: #fff;
+      color: var(--text);
       text-decoration: none;
       padding: 0.8rem 1.5rem;
       font-weight: 500;
       display: block;
     }
-    .nav-links a:hover { background: #222; color: #b19cd9; }
+    .nav-links a:hover { background: #222; color: var(--accent-purple); }
 
-    .menu-toggle {
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .menu-toggle span {
-      height: 2px; width: 25px;
-      background: #fff; border-radius: 0px;
-      transition: all 0.3s ease;
-    }
+    .menu-toggle { cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
+    .menu-toggle span { height: 2px; width: 25px; background: var(--text); transition: all 0.3s ease; }
     .nav-links.active { display: flex; animation: fadeIn 0.4s forwards; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ---------- HEADER DECOR BAND ---------- */
     .header-decor {
       position: absolute;
-      top: 70px;
-      left: 0;
-      width: 100%;
-      height: 400px;
+      top: 70px; left: 0;
+      width: 100%; height: 400px;
       background: linear-gradient(to bottom, #b3d9ff, #e6f2ff);
       background-image: url("images/header.jpg");
       background-repeat: no-repeat;
@@ -121,88 +102,140 @@
       animation: fadeUp 1s ease-in;
       z-index: 2;
     }
-
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
+    /* --- Your photo (kept in same spot) --- */
     .intro img {
-      width: 260px;
-      height: 260px;
-      border-radius: 16px;
-      object-fit: cover;
+      width: 260px; height: 260px;
+      border-radius: 16px; object-fit: cover;
       border: 4px solid #fff;
       box-shadow: 0 6px 18px rgba(255,255,255,0.25);
-      margin-top: 250px;
+      margin-top: 250px;  /* you said you like this position */
       margin-bottom: 1.2rem;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
-    .intro img:hover {
-      transform: scale(1.04);
-      box-shadow: 0 8px 24px rgba(255,255,255,0.35);
-    }
+    .intro img:hover { transform: scale(1.04); box-shadow: 0 8px 24px rgba(255,255,255,0.35); }
 
-    /* --- Gradient heading text --- */
+    /* --- Title & subcopy --- */
     .intro h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       font-weight: 700;
-      background: linear-gradient(90deg, #dfe6ff, #a8c6ff, #cfc9ff, #ffffff);
+      background: linear-gradient(90deg, #ffffff 55%, #dfe6ff 70%, #a8c6ff 85%, #cfc9ff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.3px;
+    }
+    .intro p {
+      color: var(--text);
+      font-size: 1.05rem;
+      max-width: 620px;
+      opacity: 0.95;
     }
 
-    .intro p {
-      color: #fff;
-      font-size: 1rem;
-      max-width: 500px;
+    /* --- Subtle glass card for readability --- */
+    .intro .bio-card {
+      margin-top: 0.9rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: 14px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px);
+      max-width: 680px;
+    }
+
+    /* ---------- FLOATING SIDE ICONS ---------- */
+    .float-icons {
+      position: fixed;
+      inset: 0;
+      pointer-events: none; /* so clicks only hit the icons themselves */
+      z-index: 50;
+    }
+    .float-icon {
+      position: absolute;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      background: rgba(20,20,20,0.65);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 8px 24px rgba(255,255,255,0.08);
+      backdrop-filter: blur(6px);
+      pointer-events: auto;
+      text-decoration: none;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    .float-icon:hover {
+      transform: translateY(-2px) scale(1.06);
+      border-color: rgba(177,156,217,0.65);
+      background: rgba(35,35,35,0.7);
+    }
+    .float-icon svg { width: 22px; height: 22px; fill: #eaf0ff; opacity: 0.95; }
+
+    /* positions & gentle drifts */
+    @keyframes floatY { 0% { transform: translateY(0); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0);} }
+    @keyframes floatX { 0% { transform: translateX(0); } 50% { transform: translateX(8px); } 100% { transform: translateX(0);} }
+
+    .fi-github  { left: 2.2%; top: 28%;  animation: floatY 6.5s ease-in-out infinite; }
+    .fi-linkedin{ right: 2.6%; top: 38%; animation: floatX 7.2s ease-in-out infinite; }
+    .fi-email   { left: 3.0%; bottom: 22%; animation: floatX 6.8s ease-in-out infinite; }
+    .fi-resume  { right: 3.2%; bottom: 16%; animation: floatY 7.4s ease-in-out infinite; }
+
+    /* keep icons out of the way on small screens */
+    @media (max-width: 760px) {
+      .fi-github  { left: 1.2%; top: auto; bottom: 38%; }
+      .fi-linkedin{ right: 1.2%; top: auto; bottom: 48%; }
+      .fi-email   { left: 1.2%; bottom: 26%; }
+      .fi-resume  { right: 1.2%; bottom: 16%; }
+    }
+
+    /* reduce motion if the user prefers */
+    @media (prefers-reduced-motion: reduce) {
+      .float-icon { animation: none !important; }
     }
 
     /* ---------- COLLAGE ---------- */
-    .collage {
+    .collage.container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      padding: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      padding: 2rem 1rem 3rem;
     }
-
     .collage a {
       position: relative;
       overflow: hidden;
       border-radius: 16px;
       box-shadow: 0 4px 10px rgba(255,255,255,0.15);
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
     }
-
     .collage a img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       transition: transform 0.6s ease, filter 0.4s ease;
+      display: block;
     }
-
-    .collage a:hover img {
-      transform: scale(1.08);
-      filter: brightness(80%);
-    }
-
+    .collage a:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(255,255,255,0.2); }
+    .collage a:hover img { transform: scale(1.06); filter: brightness(84%); }
     .collage a::after {
       content: attr(data-label);
       position: absolute;
-      bottom: 10px;
-      left: 10px;
+      bottom: 10px; left: 10px;
       color: #fff;
-      background: rgba(0,0,0,0.4);
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      letter-spacing: 0.5px;
+      background: rgba(0,0,0,0.45);
+      padding: 0.35rem 0.6rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      letter-spacing: 0.4px;
     }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <nav id="navbar">
     <a href="index.html" class="logo-link">
       <span class="symbol-logo">ℝ<sup>α</sup></span>
@@ -220,15 +253,41 @@
     </div>
   </nav>
 
+  <!-- FLOATING SOCIAL ICONS -->
+  <div class="float-icons" aria-hidden="false">
+    <!-- GitHub -->
+    <a class="float-icon fi-github" href="#" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12.3c0 5.22 3.37 9.64 8.05 11.2.59.11.8-.26.8-.58 0-.29-.01-1.07-.02-2.1-3.27.72-3.96-1.6-3.96-1.6-.53-1.39-1.3-1.76-1.3-1.76-1.06-.75.08-.74.08-.74 1.17.08 1.78 1.22 1.78 1.22 1.04 1.82 2.72 1.29 3.39.98.11-.78.41-1.29.75-1.59-2.61-.3-5.36-1.35-5.36-6 0-1.33.47-2.42 1.24-3.27-.12-.3-.54-1.54.12-3.19 0 0 1.01-.33 3.3 1.25a11.1 11.1 0 0 1 6 0c2.28-1.58 3.29-1.25 3.29-1.25.66 1.65.24 2.89.12 3.19.77.85 1.23 1.94 1.23 3.27 0 4.66-2.75 5.7-5.37 6 .42.37.79 1.1.79 2.22 0 1.6-.02 2.89-.02 3.29 0 .32.21.7.81.58 4.67-1.56 8.04-5.98 8.04-11.2A11.5 11.5 0 0 0 12 .5z"/></svg>
+    </a>
+    <!-- LinkedIn -->
+    <a class="float-icon fi-linkedin" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zM8 8h3.8v2.2h.06c.53-1 1.83-2.2 3.78-2.2 4.04 0 4.78 2.66 4.78 6.12V24h-4v-7.1c0-1.7-.03-3.88-2.36-3.88-2.36 0-2.72 1.85-2.72 3.76V24H8V8z"/></svg>
+    </a>
+    <!-- Email -->
+    <a class="float-icon fi-email" href="mailto:you@example.com" aria-label="Email Roya">
+      <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 18V8l8 7 8-7v10H4z"/></svg>
+    </a>
+    <!-- Resume / CV -->
+    <a class="float-icon fi-resume" href="files/Roya%20Akrami%20Resume%202025.pdf" target="_blank" rel="noopener" aria-label="Open Resume">
+      <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M8 2h6l4 4v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm6 1.5V6h2.5L14 3.5zM9 9h6v1.5H9V9zm0 3h6v1.5H9V12zm0 3h4v1.5H9V15z"/></svg>
+    </a>
+  </div>
+
+  <!-- HEADER DECOR BAND -->
   <div class="header-decor"></div>
 
+  <!-- INTRO -->
   <section class="intro">
     <img src="images/me.png" alt="Photo of Roya">
     <h1>Hi, I'm Roya.</h1>
-    <p>I'm a junior in Electrical Engineering at Colorado School of Mines! This is my portfolio, which will show you I'm quite obsessed with research in Heliophysics and Spectroscopy!</p>
+    <p class="container">I'm a junior in Electrical Engineering at Colorado School of Mines! This is my portfolio, which will show you I'm quite obsessed with research in Heliophysics and Spectroscopy!</p>
+    <div class="bio-card container">
+      Focus areas: heliophysics • spectroscopy • embedded systems • ML for space data. I care about building things that make research more accessible and communities more supportive.
+    </div>
   </section>
 
-  <section class="collage">
+  <!-- COLLAGE -->
+  <section class="collage container">
     <a href="about.html" data-label="About Me"><img src="images/about.jpg" alt="About"></a>
     <a href="projects.html" data-label="Projects"><img src="images/projects.jpg" alt="Projects"></a>
     <a href="CV.html" data-label="CV"><img src="images/cv.jpg" alt="CV"></a>
@@ -240,7 +299,6 @@
     function toggleMenu() {
       document.getElementById("navLinks").classList.toggle("active");
     }
-
     let prevScrollpos = window.pageYOffset;
     window.onscroll = function() {
       const navbar = document.getElementById("navbar");
