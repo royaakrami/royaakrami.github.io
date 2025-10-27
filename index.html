@@ -71,15 +71,18 @@
       width: min(1100px, 100%);
       margin: 0 auto;
       padding: 0 1rem;
+      overflow: visible;
     }
 
-    /* Left: "Hi," aligned to the top-left of image side */
+    /* Left: "Hi," */
     .left-hello {
-      justify-self: end;   /* hug the image */
+      justify-self: end;
       align-self: start;
       text-align: right;
       line-height: 1;
-      padding-top: 6px;    /* tiny nudge */
+      padding-top: 6px;
+      position: relative;     /* anchor for left collage */
+      min-height: 260px;      /* match photo height */
     }
     .left-hello .hi {
       font-size: 2.8rem;
@@ -88,7 +91,7 @@
       letter-spacing: 0.3px;
     }
 
-    /* Middle: Your photo (kept size/feel) */
+    /* Middle: photo */
     .intro img {
       width: 260px; height: 260px;
       border-radius: 16px; object-fit: cover;
@@ -98,14 +101,16 @@
     }
     .intro img:hover { transform: scale(1.04); box-shadow: 0 8px 24px rgba(255,255,255,0.35); }
 
-    /* Right: "I'm" stacked over "Roya" */
+    /* Right: I'm / Roya */
     .right-name {
-      justify-self: start; /* hug the image */
+      justify-self: start;
       align-self: start;
       text-align: left;
       line-height: 1.05;
       overflow: visible;
-      padding-top: 6px;    /* tiny nudge to match left */
+      padding-top: 6px;
+      position: relative;     /* anchor for right collage */
+      min-height: 260px;      /* match photo height */
     }
     .right-name .im {
       font-size: 2.4rem;
@@ -124,10 +129,8 @@
       line-height: 1.1;
       padding-bottom: 0.12em;
     }
-    .intro-split { 
-      overflow: visible; 
-    }
-    /* Subcopy under the split */
+
+    /* Subcopy */
     .intro-subcopy {
       margin: 1.1rem auto 0;
       text-align: center;
@@ -146,12 +149,58 @@
       max-width: 680px;
       text-align: center;
     }
-    @media (max-width: 820px) {
-  .right-name { line-height: 1.1; }
-  .right-name .roya { line-height: 1.15; padding-bottom: 0.14em; }
-}
 
-    /* ---------- FLOATING SIDE ICONS (unchanged except URL fix) ---------- */
+    /* ---------- ORBIT COLLAGE (floating mini-cards) ---------- */
+    .left-collage, .right-collage {
+      position: absolute;
+      inset: 0;               /* fill the column box */
+      pointer-events: none;   /* only cards are clickable */
+    }
+    .orbit-card {
+      position: absolute;
+      width: 120px;
+      height: 90px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+      display: block;
+      text-decoration: none;
+      pointer-events: auto;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .orbit-card:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 24px rgba(255,255,255,0.28);
+    }
+    .orbit-card img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: brightness(92%);
+      transition: transform .5s ease, filter .3s ease;
+    }
+    .orbit-card:hover img { transform: scale(1.06); filter: brightness(84%); }
+    .orbit-card::after {
+      content: attr(data-label);
+      position: absolute; left: 8px; bottom: 8px;
+      font-size: 0.9rem; color: #fff;
+      background: rgba(0,0,0,0.45);
+      padding: 0.28rem 0.5rem; border-radius: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Placement — adjust to taste */
+    /* LEFT of photo (“Hi,” side) */
+    .oc-resume   { top: 0%;   right: 4%; }
+    .oc-projects { bottom: 0; left:  6%; }
+
+    /* RIGHT of photo (“I'm / Roya” side) */
+    .oc-about  { top: 6%;   left: 6%; }
+    .oc-cv     { bottom: 2%; right: 4%; }
+    .oc-swir   { top: 46%;  left: 14%; }
+
+    /* ---------- FLOATING SIDE ICONS ---------- */
     .float-icons { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
     .float-icon {
       position: absolute; width: 44px; height: 44px; border-radius: 50%;
@@ -176,7 +225,7 @@
     }
     @media (prefers-reduced-motion: reduce) { .float-icon { animation: none !important; } }
 
-    /* ---------- COLLAGE ---------- */
+    /* ---------- COLLAGE (main grid lower on page) ---------- */
     .collage.container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -209,6 +258,9 @@
       .left-hello .hi { font-size: 2.4rem; }
       .right-name .im { font-size: 2.1rem; }
       .right-name .roya { font-size: 2.8rem; }
+
+      /* hide orbit cards on small screens (main collage remains) */
+      .left-collage, .right-collage { display: none; }
     }
 
     /* ---------- Navbar hide-on-scroll ---------- */
@@ -237,19 +289,15 @@
 
   <!-- FLOATING SOCIAL ICONS -->
   <div class="float-icons" aria-hidden="false">
-    <!-- GitHub -->
     <a class="float-icon fi-github" href="https://github.com/royaakrami" target="_blank" rel="noopener" aria-label="Roya’s GitHub" title="GitHub">
       <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12.3c0 5.22 3.37 9.64 8.05 11.2.59.11.8-.26.8-.58 0-.29-.01-1.07-.02-2.1-3.27.72-3.96-1.6-3.96-1.6-.53-1.39-1.3-1.76-1.3-1.76-1.06-.75.08-.74.08-.74 1.17.08 1.78 1.22 1.78 1.22 1.04 1.82 2.72 1.29 3.39.98.11-.78.41-1.29.75-1.59-2.61-.3-5.36-1.35-5.36-6 0-1.33.47-2.42 1.24-3.27-.12-.3-.54-1.54.12-3.19 0 0 1.01-.33 3.3 1.25a11.1 11.1 0 0 1 6 0c2.28-1.58 3.29-1.25 3.29-1.25.66 1.65.24 2.89.12 3.19.77.85 1.23 1.94 1.23 3.27 0 4.66-2.75 5.7-5.37 6 .42.37.79 1.1.79 2.22 0 1.6-.02 2.89-.02 3.29 0 .32.21.7.81.58 4.67-1.56 8.04-5.98 8.04-11.2A11.5 11.5 0 0 0 12 .5z"/></svg>
     </a>
-    <!-- LinkedIn (fixed to include https://) -->
     <a class="float-icon fi-linkedin" href="https://www.linkedin.com/in/roya-akrami-021113246/" target="_blank" rel="noopener" aria-label="Roya’s LinkedIn" title="LinkedIn">
       <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zM8 8h3.8v2.2h.06c.53-1 1.83-2.2 3.78-2.2 4.04 0 4.78 2.66 4.78 6.12V24h-4v-7.1c0-1.7-.03-3.88-2.36-3.88-2.36 0-2.72 1.85-2.72 3.76V24H8V8z"/></svg>
     </a>
-    <!-- Email -->
     <a class="float-icon fi-email" href="mailto:roya_akrami@mines.edu" aria-label="Email Roya" title="Email">
       <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 18V8l8 7 8-7v10H4z"/></svg>
     </a>
-    <!-- Resume / CV -->
     <a class="float-icon fi-resume" href="mailto:roya_akrami@mines.edu?subject=Hello%20Roya" target="_blank" rel="noopener" aria-label="Open Resume" title="Resume">
       <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M8 2h6l4 4v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm6 1.5V6h2.5L14 3.5zM9 9h6v1.5H9V9zm0 3h6v1.5H9V12zm0 3h4v1.5H9V15z"/></svg>
     </a>
@@ -261,15 +309,37 @@
   <!-- INTRO: Hi | [Photo] | I'm / Roya -->
   <section class="intro">
     <div class="intro-split">
+      <!-- Left: "Hi," + LEFT COLLAGE -->
       <div class="left-hello">
         <h1 class="hi">Hi,</h1>
+        <div class="left-collage">
+          <a href="resume.html" class="orbit-card oc-resume" data-label="Resume">
+            <img src="images/resume.jpg" alt="Resume">
+          </a>
+          <a href="projects.html" class="orbit-card oc-projects" data-label="Projects">
+            <img src="images/projects.jpg" alt="Projects">
+          </a>
+        </div>
       </div>
 
+      <!-- Photo -->
       <img src="images/me.png" alt="Photo of Roya">
 
+      <!-- Right: "I'm" / "Roya" + RIGHT COLLAGE -->
       <div class="right-name">
         <div class="im">I'm</div>
         <div class="roya">Roya</div>
+        <div class="right-collage">
+          <a href="about.html" class="orbit-card oc-about" data-label="About">
+            <img src="images/about.jpg" alt="About">
+          </a>
+          <a href="CV.html" class="orbit-card oc-cv" data-label="CV">
+            <img src="images/cv.jpg" alt="CV">
+          </a>
+          <a href="society-of-women-in-research.html" class="orbit-card oc-swir" data-label="SWIR">
+            <img src="images/swir.jpg" alt="SWIR">
+          </a>
+        </div>
       </div>
     </div>
 
@@ -281,7 +351,7 @@
     </div>
   </section>
 
-  <!-- COLLAGE -->
+  <!-- COLLAGE (main grid lower on page) -->
   <section class="collage container">
     <a href="about.html" data-label="About Me"><img src="images/about.jpg" alt="About"></a>
     <a href="projects.html" data-label="Projects"><img src="images/projects.jpg" alt="Projects"></a>
