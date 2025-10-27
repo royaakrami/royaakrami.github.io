@@ -6,6 +6,7 @@
   <title>Hi, I'm Roya</title>
   <!-- Import Open Sans -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     /* ---------- Reset & Body ---------- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,45 +26,45 @@
     .container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
 
     /* ---------- NAVBAR (glowy white) ---------- */
-nav {
-  position: fixed; top: 0; left: 0; width: 100%;
-  display: flex; align-items: center; justify-content: space-between;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-  padding: 0.75rem 1.5rem;
-  box-shadow: 0 2px 6px rgba(255,255,255,0.1);
-  z-index: 100;
-  transition: top 0.4s ease;
-}
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      padding: 0.75rem 1.5rem;
+      box-shadow: 0 2px 6px rgba(255,255,255,0.1);
+      z-index: 100;
+      transition: top 0.4s ease;
+    }
 
-.logo-link { display: flex; align-items: baseline; gap: 0.3rem; text-decoration: none; }
-.symbol-logo, .symbol-logo sup, .name {
-  color: #ffffff !important;
-  text-shadow: 0 0 6px rgba(255,255,255,0.6);
-  font-weight: 700;
-}
-.symbol-logo { font-size: 1.8rem; }
-.symbol-logo sup { font-size: 0.6em; margin-left: 0.05em; }
-.name { font-size: 1.1rem; font-weight: 600; }
+    .logo-link { display: flex; align-items: baseline; gap: 0.3rem; text-decoration: none; }
+    .symbol-logo, .symbol-logo sup, .name {
+      color: #ffffff !important;
+      text-shadow: 0 0 6px rgba(255,255,255,0.6);
+      font-weight: 700;
+    }
+    .symbol-logo { font-size: 1.8rem; }
+    .symbol-logo sup { font-size: 0.6em; margin-left: 0.05em; }
+    .name { font-size: 1.1rem; font-weight: 600; }
 
-/* menu button bars */
-.menu-toggle { cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
-.menu-toggle span { height: 2px; width: 25px; background: #ffffff; transition: all 0.3s ease; }
+    /* menu button bars */
+    .menu-toggle { cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
+    .menu-toggle span { height: 2px; width: 25px; background: #ffffff; transition: all 0.3s ease; }
 
-/* dropdown links */
-.nav-links {
-  display: none; flex-direction: column; position: absolute; top: 60px; right: 1rem;
-  background: rgba(30,30,30,0.95); backdrop-filter: blur(6px); border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.5); overflow: hidden; transition: opacity 0.3s ease;
-}
-.nav-links a {
-  color: #ffffff; text-decoration: none; padding: 0.8rem 1.5rem; font-weight: 500; display: block;
-  text-shadow: 0 0 6px rgba(255,255,255,0.45);
-}
-.nav-links a:hover { background: #222; color: #b19cd9; }
+    /* dropdown links */
+    .nav-links {
+      display: none; flex-direction: column; position: absolute; top: 60px; right: 1rem;
+      background: rgba(30,30,30,0.95); backdrop-filter: blur(6px); border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5); overflow: hidden; transition: opacity 0.3s ease;
+    }
+    .nav-links a {
+      color: #ffffff; text-decoration: none; padding: 0.8rem 1.5rem; font-weight: 500; display: block;
+      text-shadow: 0 0 6px rgba(255,255,255,0.45);
+    }
+    .nav-links a:hover { background: #222; color: #b19cd9; }
 
-.nav-links.active { display: flex; animation: fadeIn 0.4s forwards; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px);} to { opacity: 1; transform: translateY(0);} }
+    .nav-links.active { display: flex; animation: fadeIn 0.4s forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px);} to { opacity: 1; transform: translateY(0);} }
 
     /* ---------- HEADER DECOR BAND ---------- */
     .header-decor {
@@ -97,8 +98,8 @@ nav {
       text-align: right;
       line-height: 1;
       padding-top: 6px;
-      position: relative;     /* anchor for left collage */
-      min-height: 260px;      /* match photo height */
+      position: relative; /* anchor for left collage */
+      min-height: 260px;  /* match photo height */
     }
     .left-hello .hi {
       font-size: 2.8rem;
@@ -125,8 +126,8 @@ nav {
       line-height: 1.05;
       overflow: visible;
       padding-top: 6px;
-      position: relative;     /* anchor for right collage */
-      min-height: 260px;      /* match photo height */
+      position: relative; /* anchor for right collage */
+      min-height: 260px;  /* match photo height */
     }
     .right-name .im {
       font-size: 2.4rem;
@@ -217,59 +218,58 @@ nav {
     .oc-cv     { bottom: 0%; right: -195%; }
 
     /* ---------- FLOATING SIDE ICONS ---------- */
-.float-icons { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+    .float-icons { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+    .float-icon {
+      position: absolute; width: 50px; height: 50px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: rgba(30,30,30,0.7);
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 0 12px rgba(177,156,217,0.5), 0 0 30px rgba(177,156,217,0.25);
+      backdrop-filter: blur(8px);
+      pointer-events: auto;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      animation: pulseGlow 12s ease-in-out infinite;  /* slower glow */
+    }
+    .float-icon:hover {
+      transform: translateY(-6px) scale(1.12);
+      box-shadow: 0 0 20px rgba(177,156,217,0.9), 0 0 40px rgba(177,156,217,0.7);
+      background: rgba(40,40,40,0.85);
+    }
+    .float-icon svg {
+      width: 24px; height: 24px; fill: #ffffff; filter: drop-shadow(0 0 6px #b19cd9);
+    }
 
-.float-icon {
-  position: absolute; width: 50px; height: 50px; border-radius: 50%;
-  display: grid; place-items: center;
-  background: rgba(30,30,30,0.7);
-  border: 1px solid rgba(255,255,255,0.25);
-  box-shadow: 0 0 12px rgba(177,156,217,0.5), 0 0 30px rgba(177,156,217,0.25);
-  backdrop-filter: blur(8px);
-  pointer-events: auto;
-  text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-  animation: pulseGlow 12s ease-in-out infinite;  /* slower glow */
-}
-.float-icon:hover {
-  transform: translateY(-6px) scale(1.12);
-  box-shadow: 0 0 20px rgba(177,156,217,0.9), 0 0 40px rgba(177,156,217,0.7);
-  background: rgba(40,40,40,0.85);
-}
-.float-icon svg {
-  width: 24px; height: 24px; fill: #ffffff; filter: drop-shadow(0 0 6px #b19cd9);
-}
+    /* Slower float animations (just longer durations) */
+    @keyframes floatY { 0% { transform: translateY(0);} 50% { transform: translateY(-18px);} 100% { transform: translateY(0);} }
+    @keyframes floatX { 0% { transform: translateX(0);} 50% { transform: translateX(18px);} 100% { transform: translateX(0);} }
 
-/* Slower float animations (just longer durations) */
-@keyframes floatY { 0% { transform: translateY(0);} 50% { transform: translateY(-18px);} 100% { transform: translateY(0);} }
-@keyframes floatX { 0% { transform: translateX(0);} 50% { transform: translateX(18px);} 100% { transform: translateX(0);} }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 12px rgba(177,156,217,0.5), 0 0 30px rgba(177,156,217,0.25); }
+      50% { box-shadow: 0 0 20px rgba(177,156,217,0.8), 0 0 45px rgba(177,156,217,0.6); }
+    }
 
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 12px rgba(177,156,217,0.5), 0 0 30px rgba(177,156,217,0.25); }
-  50% { box-shadow: 0 0 20px rgba(177,156,217,0.8), 0 0 45px rgba(177,156,217,0.6); }
-}
+    /* Same positions, slower cycles */
+    .fi-github  { left: 7%; top: 33%;  animation: floatY 14s ease-in-out infinite; }
+    .fi-linkedin{ right: 7%; top: 43%; animation: floatX 16s ease-in-out infinite; }
+    .fi-email   { left: 7%; bottom: 27%; animation: floatX 15s ease-in-out infinite; }
+    .fi-resume  { right: 7%; bottom: 20%; animation: floatY 17s ease-in-out infinite; }
 
-/* Same positions, slower cycles */
-.fi-github  { left: 7%; top: 33%;  animation: floatY 14s ease-in-out infinite; }
-.fi-linkedin{ right: 7%; top: 43%; animation: floatX 16s ease-in-out infinite; }
-.fi-email   { left: 7%; bottom: 27%; animation: floatX 15s ease-in-out infinite; }
-.fi-resume  { right: 7%; bottom: 20%; animation: floatY 17s ease-in-out infinite; }
+    @media (max-width: 760px) {
+      .fi-github  { left: 2%; top: auto; bottom: 42%; }
+      .fi-linkedin{ right: 2%; top: auto; bottom: 52%; }
+      .fi-email   { left: 2%; bottom: 28%; }
+      .fi-resume  { right: 2%; bottom: 18%; }
+    }
 
-@media (max-width: 760px) {
-  .fi-github  { left: 2%; top: auto; bottom: 42%; }
-  .fi-linkedin{ right: 2%; top: auto; bottom: 52%; }
-  .fi-email   { left: 2%; bottom: 28%; }
-  .fi-resume  { right: 2%; bottom: 18%; }
-}
+    /* Respect users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .float-icon { animation: none !important; }
+      .fi-github, .fi-linkedin, .fi-email, .fi-resume { animation: none !important; }
+    }
 
-/* Respect users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .float-icon { animation: none !important; }
-  .fi-github, .fi-linkedin, .fi-email, .fi-resume { animation: none !important; }
-}
-
-/* Hide rule (toggled by the switch) */
-.hide-float-icons .float-icons { display: none !important; }
+    /* Hide rule (toggled by the switch) */
+    .hide-float-icons .float-icons { display: none !important; }
 
     /* ---------- Small screens: stack photo & text ---------- */
     @media (max-width: 1020px) {
@@ -311,21 +311,43 @@ nav {
       }
     }
 
-    /* ---------- Navbar hide-on-scroll ---------- */
+    /* ---------- Toggle switch visuals ---------- */
+    .switch {
+      position: relative; width:46px; height:26px; display:inline-block;
+    }
+    .switch input {
+      appearance:none; width:100%; height:100%; border-radius:999px;
+      border:1px solid rgba(255,255,255,0.3);
+      background:rgba(255,255,255,0.12);
+      transition:background .25s ease, border-color .25s ease;
+      outline:none; display:block;
+    }
+    .switch .knob {
+      position:absolute; top:2px; left:2px; width:22px; height:22px; border-radius:50%;
+      background:#fff; transform:translateX(0); transition:transform .25s ease;
+    }
+    .switch.on input {
+      background:rgba(128,170,255,0.35); border-color:rgba(128,170,255,0.65);
+    }
+    .switch.on .knob { transform:translateX(20px); }
+
+    /* ---------- Misc ---------- */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
   </style>
 </head>
-<body>
 
+<body>
   <!-- NAVBAR -->
   <nav id="navbar">
     <a href="index.html" class="logo-link">
       <span class="symbol-logo">ℝ<sup>α</sup></span>
       <span class="name">Roya Akrami</span>
     </a>
-    <div class="menu-toggle" onclick="toggleMenu()">
+
+    <div class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu" role="button" tabindex="0">
       <span></span><span></span><span></span>
     </div>
+
     <div class="nav-links" id="navLinks">
       <a href="about.html">About</a>
       <a href="projects.html">Projects</a>
@@ -397,57 +419,63 @@ nav {
     </div>
   </section>
 
+  <!-- FOOTER: Floating icons switch -->
+  <footer style="margin: 2rem 0 1.5rem; display: grid; place-items: center;">
+    <label style="display:flex; align-items:center; gap:0.6rem; user-select:none; cursor:pointer;">
+      <span class="switch">
+        <input id="toggleFloatIcons" type="checkbox" checked aria-label="Toggle floating icons">
+        <span id="toggleFloatIconsKnob" class="knob" aria-hidden="true"></span>
+      </span>
+      <span style="color:#fff; opacity:0.9;">Floating icons</span>
+    </label>
+  </footer>
+
+  <!-- SCRIPTS -->
   <script>
-    function toggleMenu() {
-      document.getElementById("navLinks").classList.toggle("active");
-    }
-    let prevScrollpos = window.pageYOffset;
-    window.onscroll = function() {
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- mobile menu ---
+      window.toggleMenu = function() {
+        document.getElementById("navLinks").classList.toggle("active");
+      };
+
+      // --- navbar hide-on-scroll with small threshold ---
       const navbar = document.getElementById("navbar");
-      const currentScrollPos = window.pageYOffset;
-      navbar.style.top = (prevScrollpos > currentScrollPos) ? "0" : "-70px";
-      prevScrollpos = currentScrollPos;
-    }
-    // ---- Floating icons toggle (persisted) ----
-(function() {
-  const KEY = 'floatIconsEnabled';
-  const checkbox = document.getElementById('toggleFloatIcons');
-  const knob = document.getElementById('toggleFloatIconsKnob');
+      let prev = window.scrollY;
+      const THRESH = 10; // don’t hide unless user scrolls >10px
+      navbar.style.top = "0px";
 
-  // read saved state (default: enabled = true)
-  const saved = localStorage.getItem(KEY);
-  const enabled = saved === null ? true : saved === 'true';
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        if (y < THRESH || y < prev) {
+          navbar.style.top = "0";
+        } else {
+          navbar.style.top = "-70px";
+        }
+        prev = y;
+      }, { passive: true });
 
-  // apply initial state
-  checkbox.checked = enabled;
-  document.body.classList.toggle('hide-float-icons', !enabled);
-  // set knob position
-  requestAnimationFrame(() => {
-    knob.style.transform = enabled ? 'translateX(22px)' : 'translateX(2px)';
-    checkbox.style.background = enabled ? 'rgba(128,170,255,0.35)' : 'rgba(255,255,255,0.12)';
-    checkbox.style.borderColor = enabled ? 'rgba(128,170,255,0.65)' : 'rgba(255,255,255,0.3)';
-  });
+      // --- floating icons toggle (persisted) ---
+      const KEY = 'floatIconsEnabled';
+      const checkbox = document.getElementById('toggleFloatIcons');
+      const track = checkbox?.closest('.switch');
 
-  // update on click
-  checkbox.addEventListener('click', () => {
-    const on = checkbox.checked;
-    document.body.classList.toggle('hide-float-icons', !on);
-    localStorage.setItem(KEY, String(on));
-    knob.style.transform = on ? 'translateX(22px)' : 'translateX(2px)';
-    checkbox.style.background = on ? 'rgba(128,170,255,0.35)' : 'rgba(255,255,255,0.12)';
-    checkbox.style.borderColor = on ? 'rgba(128,170,255,0.65)' : 'rgba(255,255,255,0.3)';
-  });
-})();
+      function apply(on) {
+        document.body.classList.toggle('hide-float-icons', !on);
+        if (track) track.classList.toggle('on', on);
+        localStorage.setItem(KEY, String(on));
+      }
 
+      if (checkbox) {
+        const saved = localStorage.getItem(KEY);
+        const enabled = (saved === null) ? true : saved === 'true';
+        checkbox.checked = enabled;
+        apply(enabled);
+
+        checkbox.addEventListener('change', () => {
+          apply(checkbox.checked);
+        });
+      }
+    });
   </script>
-<footer style="margin: 2rem 0 1.5rem; display: grid; place-items: center;">
-  <label style="display:flex; align-items:center; gap:0.6rem; user-select:none; cursor:pointer;">
-    <input id="toggleFloatIcons" type="checkbox" checked
-           style="appearance:none; width:46px; height:26px; border-radius:999px; position:relative; outline:none; border:1px solid rgba(255,255,255,0.3); background:rgba(255,255,255,0.12); transition:background .25s ease;">
-    <span id="toggleFloatIconsKnob"
-          style="position:absolute; width:22px; height:22px; border-radius:50%; background:#fff; transform:translateX(2px); transition:transform .25s ease;"></span>
-    <span style="color:#fff; opacity:0.9;">Floating icons</span>
-  </label>
-</footer>
 </body>
 </html>
