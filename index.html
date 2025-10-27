@@ -226,44 +226,48 @@
     }
     @media (prefers-reduced-motion: reduce) { .float-icon { animation: none !important; } }
 
-    /* ---------- Small screens: stack photo & text ---------- */
-    @media (max-width: 1020px) {
-      /* reel the cards in a bit on narrower desktops */
-      .oc-resume { right: -10%; }
-      .oc-projects { left: -8%; }
-      .oc-about { right: -6%; }
-      .oc-cv { right: -12%; }
-      .oc-swir { right: -4%; }
-    }
-    @media (max-width: 820px) {
-      .intro-split {
-        grid-template-columns: 1fr; gap: 0.75rem; text-align: center;
-      }
-      .left-hello, .right-name { justify-self: center; text-align: center; padding-top: 0; }
-      .left-hello .hi { font-size: 2.4rem; }
-      .right-name .im { font-size: 2.1rem; }
-      .right-name .roya { font-size: 2.8rem; }
-
-      /* hide floating cards on small screens */
-      .left-collage, .right-collage { display: none; }
-    }
-/* === OVERRIDES: push orbit cards much farther from center (desktop only) === */
-@media (min-width: 821px) {
-  .intro, .intro-split, .left-collage, .right-collage { overflow: visible; }
-  .left-collage, .right-collage { z-index: 3; }
-
-  /* (optional) bigger tiles */
-  .orbit-card { width: 180px; height: 130px; border-radius: 18px; }
-
-  /* LEFT of photo (“Hi,” side) */
-  .oc-resume   { top: -6%;  right: -300%; }
-  .oc-projects { bottom: -6%; left:  -250%; }
-
-  /* RIGHT of photo (“I'm / Roya” side) */
-  .oc-about  { top: -2%;  right: -390%; }
-  .oc-cv     { bottom: -8%; right: -300%; }
-  .oc-swir   { top: 38%;  right: -340%; }
+/* ---------- Small screens: stack photo & text ---------- */
+@media (max-width: 1020px) {
+  /* reel the cards in a bit on narrower desktops */
+  .oc-resume { right: -10%; }
+  .oc-projects { left: -8%; }
+  .oc-about { right: -6%; }
+  .oc-cv { right: -12%; }
+  .oc-swir { right: -4%; }
 }
+
+@media (max-width: 820px) {
+  .intro-split {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    text-align: center;
+  }
+  .left-hello, .right-name {
+    justify-self: center;
+    text-align: center;
+    padding-top: 0;
+  }
+  .left-hello .hi { font-size: 2.4rem; }
+  .right-name .im { font-size: 2.1rem; }
+  .right-name .roya { font-size: 2.8rem; }
+
+  /* instead of hiding — stack orbit cards neatly below photo */
+  .left-collage, .right-collage {
+    position: static;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .orbit-card {
+    position: static;
+    width: 120px;
+    height: 90px;
+    border-radius: 12px;
+  }
+}
+
 
     /* ---------- Navbar hide-on-scroll ---------- */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
