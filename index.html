@@ -4,13 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hi, I'm Roya</title>
+  <!-- Import Open Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     /* ---------- Reset & Body ---------- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: "Times New Roman", serif;
+      font-family: 'Open Sans', sans-serif;
       background: black;
-      color: #ddd;
+      color: #fff;
       overflow-x: hidden;
     }
 
@@ -28,7 +30,7 @@
       box-shadow: 0 2px 6px rgba(255,255,255,0.1);
       z-index: 100;
       transition: top 0.4s ease;
-      font-family: "Times New Roman", serif;
+      font-family: 'Open Sans', sans-serif;
     }
 
     .logo-link {
@@ -41,7 +43,6 @@
       font-size: 1.8rem;
       color: #80aaff;
       font-weight: 700;
-      font-family: "Times New Roman", serif;
     }
     .symbol-logo sup {
       font-size: 0.6em;
@@ -50,7 +51,6 @@
     }
     .name { font-size: 1.1rem; font-weight: 600; color: #b19cd9; }
 
-    /* --- Navbar menu --- */
     .nav-links {
       display: none;
       flex-direction: column;
@@ -63,10 +63,9 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.5);
       overflow: hidden;
       transition: opacity 0.3s ease;
-      font-family: "Times New Roman", serif;
     }
     .nav-links a {
-      color: #ddd;
+      color: #fff;
       text-decoration: none;
       padding: 0.8rem 1.5rem;
       font-weight: 500;
@@ -82,7 +81,7 @@
     }
     .menu-toggle span {
       height: 2px; width: 25px;
-      background: #ccc; border-radius: 0px;
+      background: #fff; border-radius: 0px;
       transition: all 0.3s ease;
     }
     .nav-links.active { display: flex; animation: fadeIn 0.4s forwards; }
@@ -103,7 +102,7 @@
       background-image: url("images/header.jpg");
       background-repeat: no-repeat;
       background-position: center top;
-      background-size: cover; /* ensures full width, crops only sides */
+      background-size: cover;
       background-blend-mode: overlay;
       opacity: 1;
       z-index: 1;
@@ -128,7 +127,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- Roya photo --- */
     .intro img {
       width: 260px;
       height: 260px;
@@ -140,7 +138,6 @@
       margin-bottom: 1.2rem;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
-
     .intro img:hover {
       transform: scale(1.04);
       box-shadow: 0 8px 24px rgba(255,255,255,0.35);
@@ -150,26 +147,24 @@
     .intro h1 {
       font-size: 2.5rem;
       font-weight: 700;
-      background: linear-gradient(90deg, #b19cd9, #80aaff, #b19cd9);
+      background: linear-gradient(90deg, #dfe6ff, #a8c6ff, #cfc9ff, #ffffff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 0.5rem;
     }
 
     .intro p {
-      color: #ddd;
+      color: #fff;
       font-size: 1rem;
       max-width: 500px;
-      font-family: "Times New Roman", serif;
     }
 
-    /* ---------- COLLAGE SECTION ---------- */
+    /* ---------- COLLAGE ---------- */
     .collage {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 12px;
       padding: 2rem;
-      font-family: "Times New Roman", serif;
     }
 
     .collage a {
@@ -197,7 +192,7 @@
       position: absolute;
       bottom: 10px;
       left: 10px;
-      color: white;
+      color: #fff;
       background: rgba(0,0,0,0.4);
       padding: 0.3rem 0.6rem;
       border-radius: 6px;
@@ -208,7 +203,6 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav id="navbar">
     <a href="index.html" class="logo-link">
       <span class="symbol-logo">ℝ<sup>α</sup></span>
@@ -226,17 +220,14 @@
     </div>
   </nav>
 
-  <!-- HEADER DECOR BAND -->
   <div class="header-decor"></div>
 
-  <!-- INTRO -->
   <section class="intro">
     <img src="images/me.png" alt="Photo of Roya">
     <h1>Hi, I'm Roya.</h1>
     <p>I'm a junior in Electrical Engineering at Colorado School of Mines! This is my portfolio, which will show you I'm quite obsessed with research in Heliophysics and Spectroscopy!</p>
   </section>
 
-  <!-- COLLAGE -->
   <section class="collage">
     <a href="about.html" data-label="About Me"><img src="images/about.jpg" alt="About"></a>
     <a href="projects.html" data-label="Projects"><img src="images/projects.jpg" alt="Projects"></a>
@@ -254,15 +245,10 @@
     window.onscroll = function() {
       const navbar = document.getElementById("navbar");
       const currentScrollPos = window.pageYOffset;
-      if (prevScrollpos > currentScrollPos) {
-        navbar.style.top = "0";
-      } else {
-        navbar.style.top = "-70px";
-      }
+      navbar.style.top = (prevScrollpos > currentScrollPos) ? "0" : "-70px";
       prevScrollpos = currentScrollPos;
     }
   </script>
 
 </body>
 </html>
-
