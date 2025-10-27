@@ -408,7 +408,46 @@ nav {
       navbar.style.top = (prevScrollpos > currentScrollPos) ? "0" : "-70px";
       prevScrollpos = currentScrollPos;
     }
-  </script>
+    // ---- Floating icons toggle (persisted) ----
+(function() {
+  const KEY = 'floatIconsEnabled';
+  const checkbox = document.getElementById('toggleFloatIcons');
+  const knob = document.getElementById('toggleFloatIconsKnob');
 
+  // read saved state (default: enabled = true)
+  const saved = localStorage.getItem(KEY);
+  const enabled = saved === null ? true : saved === 'true';
+
+  // apply initial state
+  checkbox.checked = enabled;
+  document.body.classList.toggle('hide-float-icons', !enabled);
+  // set knob position
+  requestAnimationFrame(() => {
+    knob.style.transform = enabled ? 'translateX(22px)' : 'translateX(2px)';
+    checkbox.style.background = enabled ? 'rgba(128,170,255,0.35)' : 'rgba(255,255,255,0.12)';
+    checkbox.style.borderColor = enabled ? 'rgba(128,170,255,0.65)' : 'rgba(255,255,255,0.3)';
+  });
+
+  // update on click
+  checkbox.addEventListener('click', () => {
+    const on = checkbox.checked;
+    document.body.classList.toggle('hide-float-icons', !on);
+    localStorage.setItem(KEY, String(on));
+    knob.style.transform = on ? 'translateX(22px)' : 'translateX(2px)';
+    checkbox.style.background = on ? 'rgba(128,170,255,0.35)' : 'rgba(255,255,255,0.12)';
+    checkbox.style.borderColor = on ? 'rgba(128,170,255,0.65)' : 'rgba(255,255,255,0.3)';
+  });
+})();
+
+  </script>
+<footer style="margin: 2rem 0 1.5rem; display: grid; place-items: center;">
+  <label style="display:flex; align-items:center; gap:0.6rem; user-select:none; cursor:pointer;">
+    <input id="toggleFloatIcons" type="checkbox" checked
+           style="appearance:none; width:46px; height:26px; border-radius:999px; position:relative; outline:none; border:1px solid rgba(255,255,255,0.3); background:rgba(255,255,255,0.12); transition:background .25s ease;">
+    <span id="toggleFloatIconsKnob"
+          style="position:absolute; width:22px; height:22px; border-radius:50%; background:#fff; transform:translateX(2px); transition:transform .25s ease;"></span>
+    <span style="color:#fff; opacity:0.9;">Floating icons</span>
+  </label>
+</footer>
 </body>
 </html>
