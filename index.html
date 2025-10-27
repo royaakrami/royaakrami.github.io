@@ -26,16 +26,18 @@
 
     /* ---------- NAVBAR ---------- */
     nav {
-      position: fixed; top: 0; left: 0; width: 100%;
-      display: flex; align-items: center; justify-content: space-between;
-      background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
-      padding: 0.75rem 1.5rem; box-shadow: 0 2px 6px rgba(255,255,255,0.1);
-      z-index: 100; transition: top 0.4s ease;
-    }
-    .logo-link { display: flex; align-items: baseline; gap: 0.3rem; text-decoration: none; }
-    .symbol-logo { font-size: 1.8rem; color: var(--accent-blue); font-weight: 700; }
-    .symbol-logo sup { font-size: 0.6em; color: var(--accent-blue-dim); margin-left: 0.05em; }
-    .name { font-size: 1.1rem; font-weight: 600; color: var(--accent-purple); }
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.08); backdrop-filter: blur(10px);
+  padding: 0.75rem 1.5rem; box-shadow: 0 2px 6px rgba(255,255,255,0.1);
+  z-index: 100; transition: top 0.4s ease;
+}
+
+.logo-link { display: flex; align-items: baseline; gap: 0.3rem; text-decoration: none; }
+.symbol-logo, .symbol-logo sup, .name {
+  color: #ffffff !important;
+  text-shadow: 0 0 6px rgba(255,255,255,0.6);
+}
 
     .nav-links {
       display: none; flex-direction: column; position: absolute; top: 60px; right: 1rem;
@@ -201,28 +203,40 @@
     .oc-cv     { bottom: 0%; right: -195%; }
 
     /* ---------- FLOATING SIDE ICONS ---------- */
-    .float-icons { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
-    .float-icon {
-      position: absolute; width: 44px; height: 44px; border-radius: 50%;
-      display: grid; place-items: center; background: rgba(20,20,20,0.65);
-      border: 1px solid rgba(255,255,255,0.18); box-shadow: 0 8px 24px rgba(255,255,255,0.08);
-      backdrop-filter: blur(6px); pointer-events: auto; text-decoration: none;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-    }
-    .float-icon:hover { transform: translateY(-2px) scale(1.06); border-color: rgba(177,156,217,0.65); background: rgba(35,35,35,0.7); }
-    .float-icon svg { width: 22px; height: 22px; fill: #eaf0ff; opacity: 0.95; }
-    @keyframes floatY { 0% { transform: translateY(0);} 50% { transform: translateY(-8px);} 100% { transform: translateY(0);} }
-    @keyframes floatX { 0% { transform: translateX(0);} 50% { transform: translateX(8px);} 100% { transform: translateX(0);} }
-    .fi-github  { left: 2.2%; top: 28%;  animation: floatY 6.5s ease-in-out infinite; }
-    .fi-linkedin{ right: 2.6%; top: 38%; animation: floatX 7.2s ease-in-out infinite; }
-    .fi-email   { left: 3.0%; bottom: 22%; animation: floatX 6.8s ease-in-out infinite; }
-    .fi-resume  { right: 3.2%; bottom: 16%; animation: floatY 7.4s ease-in-out infinite; }
-    @media (max-width: 760px) {
-      .fi-github  { left: 1.2%; top: auto; bottom: 38%; }
-      .fi-linkedin{ right: 1.2%; top: auto; bottom: 48%; }
-      .fi-email   { left: 1.2%; bottom: 26%; }
-      .fi-resume  { right: 1.2%; bottom: 16%; }
-    }
+.float-icons { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+
+.float-icon {
+  position: absolute; width: 50px; height: 50px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(30,30,30,0.7);
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 0 10px rgba(177,156,217,0.5), 0 0 20px rgba(177,156,217,0.2);
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.float-icon:hover {
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 0 14px rgba(177,156,217,0.8), 0 0 30px rgba(177,156,217,0.6);
+  background: rgba(40,40,40,0.85);
+}
+.float-icon svg {
+  width: 24px; height: 24px; fill: #ffffff; filter: drop-shadow(0 0 5px #b19cd9);
+}
+
+/* Position them closer to center */
+.fi-github  { left: 6%; top: 35%;  animation: floatY 6.5s ease-in-out infinite; }
+.fi-linkedin{ right: 6%; top: 45%; animation: floatX 7.2s ease-in-out infinite; }
+.fi-email   { left: 6%; bottom: 28%; animation: floatX 6.8s ease-in-out infinite; }
+.fi-resume  { right: 6%; bottom: 22%; animation: floatY 7.4s ease-in-out infinite; }
+
+@media (max-width: 760px) {
+  .fi-github  { left: 2%; top: auto; bottom: 42%; }
+  .fi-linkedin{ right: 2%; top: auto; bottom: 52%; }
+  .fi-email   { left: 2%; bottom: 28%; }
+  .fi-resume  { right: 2%; bottom: 18%; }
+}
     @media (prefers-reduced-motion: reduce) { .float-icon { animation: none !important; } }
 
     /* ---------- Small screens: stack photo & text ---------- */
