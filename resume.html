@@ -31,9 +31,15 @@
       transition: top 0.4s ease;
     }
     .logo-link { display: flex; align-items: baseline; gap: 0.3rem; text-decoration: none; }
-    .symbol-logo { font-size: 1.8rem; color: #80aaff; font-weight: 700; }
-    .symbol-logo sup { font-size: 0.6em; color: #6699ff; margin-left: 0.05em; }
-    .name { font-size: 1.1rem; font-weight: 600; color: #b19cd9; }
+    /* Glowy white logo + name */
+.symbol-logo, .symbol-logo sup, .name {
+  color: #ffffff !important;
+  text-shadow: 0 0 6px rgba(255,255,255,0.6);
+  font-weight: 700;
+}
+.symbol-logo { font-size: 1.8rem; }
+.symbol-logo sup { font-size: 0.6em; margin-left: 0.05em; }
+.name { font-size: 1.1rem; font-weight: 600; }
 
     .nav-links {
       display: none; flex-direction: column; position: absolute; top: 60px; right: 1rem;
