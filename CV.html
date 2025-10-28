@@ -3,33 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello from Roya</title>
-  <!-- Open Sans -->
+  <title>Curriculum Vitae | Roya Akrami</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
     /* ---------- Reset & Body ---------- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --text: #fff;
-      --accent-blue: #80aaff;
-      --accent-purple: #b19cd9;
-      --glass: rgba(255,255,255,0.08);
-    }
     body {
       font-family: 'Open Sans', sans-serif;
       background: black;
-      color: var(--text);
+      color: #fff;
       overflow-x: hidden;
-      min-height: 100vh;
     }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
 
     /* ---------- NAVBAR ---------- */
     nav {
-      position: sticky; top: 0; left: 0; width: 100%;
-      display: flex; align-items: center; justify-content: space-between;
-      background: rgba(255,255,255,0.08);
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.1);
       backdrop-filter: blur(10px);
       padding: 0.75rem 1.5rem;
       box-shadow: 0 2px 6px rgba(255,255,255,0.1);
@@ -37,85 +31,76 @@
       transition: top 0.4s ease;
     }
     .logo-link { display: flex; align-items: baseline; gap: 0.3rem; text-decoration: none; }
-    .symbol-logo, .symbol-logo sup, .name {
-      color: #ffffff !important;
-      text-shadow: 0 0 6px rgba(255,255,255,0.6);
-      font-weight: 700;
+    .symbol-logo { font-size: 1.8rem; color: #80aaff; font-weight: 700; }
+    .symbol-logo sup { font-size: 0.6em; color: #6699ff; margin-left: 0.05em; }
+    .name { font-size: 1.1rem; font-weight: 600; color: #b19cd9; }
+
+    .nav-links {
+      display: none; flex-direction: column; position: absolute; top: 60px; right: 1rem;
+      background: rgba(30,30,30,0.95); backdrop-filter: blur(6px); border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5); overflow: hidden; transition: opacity 0.3s ease;
     }
-    .symbol-logo { font-size: 1.8rem; }
-    .symbol-logo sup { font-size: 0.6em; margin-left: 0.05em; }
-    .name { font-size: 1.1rem; font-weight: 600; }
+    .nav-links a { color: #fff; text-decoration: none; padding: 0.8rem 1.5rem; font-weight: 500; display: block; }
+    .nav-links a:hover { background: #222; color: #b19cd9; }
+    .menu-toggle { cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
+    .menu-toggle span { height: 2px; width: 25px; background: #fff; transition: all 0.3s ease; }
+    .nav-links.active { display: flex; animation: fadeIn 0.4s forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px);} to { opacity: 1; transform: translateY(0);} }
 
-    /* ---------- MENU ---------- */
-    .menu-toggle { cursor: pointer; display: none; flex-direction: column; gap: 4px; }
-    .menu-toggle span { height: 2px; width: 25px; background: #ffffff; transition: all 0.3s ease; }
-
-    .nav-links { display: flex; gap: 1rem; }
-    .nav-links a {
-      color: #ffffff;
-      text-decoration: none;
-      padding: 0.4rem 0.6rem;
-      font-weight: 500;
-      text-shadow: 0 0 6px rgba(255,255,255,0.45);
-      border-radius: 8px;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-    .nav-links a:hover { background: rgba(255,255,255,0.08); color: var(--accent-purple); }
-
-    /* ---------- MOBILE MENU ---------- */
-    @media (max-width: 700px) {
-      .menu-toggle { display: flex; }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute; top: 60px; right: 1rem;
-        background: rgba(30,30,30,0.95);
-        backdrop-filter: blur(6px);
-        border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        overflow: hidden;
-        animation: fadeIn 0.4s forwards;
-      }
-      .nav-links a { padding: 0.8rem 1.2rem; }
-      .nav-links.active { display: flex; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ---------- MAIN CONTENT ---------- */
-    main {
-      padding: 120px 1rem 40px;
-      max-width: 900px;
-      margin: 0 auto;
+    /* ---------- PAGE HEADER ---------- */
+    header {
+      padding-top: 120px;
       text-align: center;
-      position: relative;
-      z-index: 2;
+      margin-bottom: 1rem;
     }
-    h1 {
-      font-size: 2.2rem;
+    header h1 {
+      font-size: 2.4rem;
       font-weight: 700;
       background: linear-gradient(90deg, #dfe6ff, #a8c6ff, #cfc9ff, #ffffff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
     }
-    .note {
-      margin: 1rem auto 0;
-      padding: 1.25rem 1.5rem;
+    header p {
+      color: #e9e9e9;
+      margin-top: 0.5rem;
+      opacity: 0.95;
+    }
+
+    /* ---------- PDF ACTIONS ---------- */
+    .pdf-actions {
+      max-width: 1100px;
+      margin: 0.75rem auto 0;
+      display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap;
+      padding: 0 1rem;
+    }
+    .pdf-actions a {
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(128,170,255,0.6);
+      color: #80aaff;
+      font-size: 0.95rem;
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .pdf-actions a:hover { background: rgba(128,170,255,0.12); color: #b19cd9; border-color: rgba(177,156,217,0.8); }
+
+    /* ---------- PDF VIEWER ---------- */
+    .pdf-wrap {
+      max-width: 1100px;
+      margin: 0.75rem auto 3rem;
+      padding: 0 1rem;
+    }
+    .pdf-frame {
+      width: 100%;
+      height: 82vh;
+      border: 1px solid rgba(255,255,255,0.15);
       border-radius: 14px;
-      background: var(--glass);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(6px);
-      max-width: 640px;
-      text-align: left;
-      line-height: 1.6;
-      font-size: 1rem;
+      background: #0f0f10;
+      box-shadow: 0 10px 28px rgba(255,255,255,0.08);
     }
-    .note p { margin-bottom: 1rem; color: #e9e9e9; opacity: 0.95; }
-    .note p:last-child { margin-bottom: 0; }
+    @media (max-width: 640px) {
+      .pdf-frame { height: 72vh; }
+    }
 
     /* ---------- FLOATING SIDE ICONS ---------- */
     .float-icons { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
@@ -179,27 +164,27 @@
     }
     .switch.on input { background:rgba(128,170,255,0.35); border-color:rgba(128,170,255,0.65); }
     .switch.on .knob { transform:translateX(20px); }
+
+    /* Footer layout for toggle */
+    .toggle-wrap { margin: 2rem 0 1.5rem; display: grid; place-items: center; }
   </style>
 </head>
-
 <body>
 
   <!-- NAVBAR -->
   <nav id="navbar">
-    <a href="index.html" class="logo-link" aria-label="Home">
+    <a href="index.html" class="logo-link">
       <span class="symbol-logo">ℝ<sup>α</sup></span>
       <span class="name">Roya Akrami</span>
     </a>
-
-    <div class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu" role="button" tabindex="0">
+    <div class="menu-toggle" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
-
     <div class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="projects.html">Projects</a>
-      <a href="CV.html">CV</a>
+      <a href="CV.html" aria-current="page">CV</a>
+      <a href="society-of-women-in-research.html">SWIR</a>
       <a href="resume.html">Resume</a>
     </div>
   </nav>
@@ -215,35 +200,39 @@
     <a class="float-icon fi-email" href="mailto:roya_akrami@mines.edu" aria-label="Email Roya" title="Email">
       <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 18V8l8 7 8-7v10H4z"/></svg>
     </a>
-    <a class="float-icon fi-resume" href="resume.html" target="_blank" rel="noopener" aria-label="Open Resume" title="Resume">
+    <!-- On the Resume page, this opens the Resume PDF -->
+    <a class="float-icon fi-resume" href="files/Roya%20Akrami%20Resume%202025.pdf" target="_blank" rel="noopener" aria-label="Open Resume PDF" title="Open Resume PDF">
       <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M8 2h6l4 4v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm6 1.5V6h2.5L14 3.5zM9 9h6v1.5H9V9zm0 3h6v1.5H9V12zm0 3h4v1.5H9V15z"/></svg>
     </a>
   </div>
 
-  <!-- MAIN -->
-  <main>
-    <h1>About Me</h1>
+  <!-- HEADER -->
+  <header>
+    <h1>Curriculum Vitae</h1>
+    <p>View or download my latest CV directly on this page.</p>
+  </header>
 
-    <div class="note">
-      <p>Hello, I’m Roya, a junior Electrical Engineering student at the Colorado School of Mines.</p>
+  <!-- ACTION BUTTONS -->
+  <div class="pdf-actions">
+    <a href="files/Roya%20Akrami%20CV%202025.pdf" target="_blank" rel="noopener">Open in New Tab</a>
+    <a href="files/Roya%20Akrami%20CV%202025.pdf" download>Download PDF</a>
+  </div>
 
-      <p>My most recent work focuses on heliophysics and machine learning, which began in Summer 2025 during my internship at NASA’s Goddard Space Flight Center. I’m currently building a 28-layer Residual Neural Network to detect exospheric hydrogen Lyman-alpha emissions. I’ve grown a deep appreciation for machine learning research throughout this project, as I feel it represents a genuine leap forward in how researchers understand and visualize scientific phenomena.</p>
+  <!-- PDF VIEWER -->
+  <main class="pdf-wrap">
+    <iframe
+      class="pdf-frame"
+      src="files/Roya%20Akrami%20CV%202025.pdf#toolbar=1&zoom=page-width"
+      title="Roya Akrami CV 2025 (PDF)"
+    ></iframe>
 
-      <p>Before NASA, my research journey began during my first semester at university in Phal Lab. By my second semester, I contributed to a paper applying vibrational circular dichroism to Alzheimer’s biomarker detection. I was the only first-year in several years to place at the Undergraduate Research Symposium and earned 3rd place presenting this project.</p>
-
-      <p>Following additional research with Phal Lab on LiDAR systems and the development of a rover during the subsequent summer, I established the <strong>Society of Women in Research</strong>, a registered organization at Mines created to support women in research and foster connections to mentors, funding, and outreach initiatives.</p>
-
-      <p>I’m now at the point in my education where I’ve studied Embedded Systems, Digital Logic, and Information Systems Science, which includes signal and Fourier transform processing. I’ve also gained hands-on experience with Verilog, C, MPLAB X IDE, and MATLAB, and have done extensive hardware integration using custom PCBs, FPGA Lite systems, and oscilloscopes.</p>
-
-      <p>Additionally, the website you’re currently viewing is built in HTML and MIT-licensed on my GitHub. Please do not judge my code harshly! It’s not very organized yet since I made it during exam week. Regardless, I believe this site itself reflects how I enjoy integrating design, research, and technical communication into my work.</p>
-
-      <p>Thank you for taking the time to visit my page.<br>
-      <strong>— Roya Akrami</strong></p>
+    <div class="pdf-actions" style="margin-top: 0.75rem;">
+      <a href="files/Roya%20Akrami%20CV%202025.pdf" target="_blank" rel="noopener">Having trouble? Open the PDF</a>
     </div>
   </main>
 
-  <!-- FOOTER: Floating icons switch -->
-  <footer class="container" style="margin: 0 0 1.5rem; display: grid; place-items: center;">
+  <!-- FOOTER: Floating icons toggle -->
+  <footer class="toggle-wrap">
     <label style="display:flex; align-items:center; gap:0.6rem; user-select:none; cursor:pointer;">
       <span class="switch">
         <input id="toggleFloatIcons" type="checkbox" checked aria-label="Toggle floating icons">
@@ -258,7 +247,16 @@
       document.getElementById("navLinks").classList.toggle("active");
     }
 
-    // floating icons toggle (persisted)
+    // navbar hide-on-scroll (with small threshold)
+    let prevScrollpos = window.pageYOffset;
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById("navbar");
+      const currentScrollPos = window.pageYOffset;
+      navbar.style.top = (prevScrollpos > currentScrollPos || currentScrollPos < 10) ? "0" : "-70px";
+      prevScrollpos = currentScrollPos;
+    }, { passive: true });
+
+    // floating icons toggle (persist across pages)
     document.addEventListener('DOMContentLoaded', () => {
       const KEY = 'floatIconsEnabled';
       const checkbox = document.getElementById('toggleFloatIcons');
