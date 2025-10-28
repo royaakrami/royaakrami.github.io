@@ -92,7 +92,7 @@
     }
     .pdf-frame {
       width: 100%;
-      height: 82vh;            /* big, readable viewport */
+      height: 82vh;
       border: 1px solid rgba(255,255,255,0.15);
       border-radius: 14px;
       background: #0f0f10;
@@ -101,6 +101,72 @@
     @media (max-width: 640px) {
       .pdf-frame { height: 72vh; }
     }
+
+    /* ---------- FLOATING SIDE ICONS ---------- */
+    .float-icons { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+    .float-icon {
+      position: absolute; width: 50px; height: 50px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: rgba(30,30,30,0.7);
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 0 12px rgba(177,156,217,0.5), 0 0 30px rgba(177,156,217,0.25);
+      backdrop-filter: blur(8px);
+      pointer-events: auto;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      animation: pulseGlow 12s ease-in-out infinite;
+    }
+    .float-icon:hover {
+      transform: translateY(-6px) scale(1.12);
+      box-shadow: 0 0 20px rgba(177,156,217,0.9), 0 0 40px rgba(177,156,217,0.7);
+      background: rgba(40,40,40,0.85);
+    }
+    .float-icon svg { width: 24px; height: 24px; fill: #ffffff; filter: drop-shadow(0 0 6px #b19cd9); }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 12px rgba(177,156,217,0.5), 0 0 30px rgba(177,156,217,0.25); }
+      50% { box-shadow: 0 0 20px rgba(177,156,217,0.8), 0 0 45px rgba(177,156,217,0.6); }
+    }
+    @keyframes floatY { 0% { transform: translateY(0);} 50% { transform: translateY(-18px);} 100% { transform: translateY(0);} }
+    @keyframes floatX { 0% { transform: translateX(0);} 50% { transform: translateX(18px);} 100% { transform: translateX(0);} }
+
+    .fi-github  { left: 7%; top: 33%;  animation: floatY 14s ease-in-out infinite; }
+    .fi-linkedin{ right: 7%; top: 43%; animation: floatX 16s ease-in-out infinite; }
+    .fi-email   { left: 7%; bottom: 27%; animation: floatX 15s ease-in-out infinite; }
+    .fi-resume  { right: 7%; bottom: 20%; animation: floatY 17s ease-in-out infinite; }
+
+    @media (max-width: 760px) {
+      .fi-github  { left: 2%; top: auto; bottom: 42%; }
+      .fi-linkedin{ right: 2%; top: auto; bottom: 52%; }
+      .fi-email   { left: 2%; bottom: 28%; }
+      .fi-resume  { right: 2%; bottom: 18%; }
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .float-icon { animation: none !important; }
+      .fi-github, .fi-linkedin, .fi-email, .fi-resume { animation: none !important; }
+    }
+    .hide-float-icons .float-icons { display: none !important; }
+
+    /* ---------- Toggle switch visuals ---------- */
+    .switch { position: relative; width:46px; height:26px; display:inline-block; }
+    .switch input {
+      appearance:none; width:100%; height:100%; border-radius:999px;
+      border:1px solid rgba(255,255,255,0.3);
+      background:rgba(255,255,255,0.12);
+      transition:background .25s ease, border-color .25s ease;
+      outline:none; display:block;
+    }
+    .switch .knob {
+      position:absolute; top:2px; left:2px; width:22px; height:22px; border-radius:50%;
+      background:#fff; transform:translateX(0); transition:transform .25s ease;
+    }
+    .switch.on input { background:rgba(128,170,255,0.35); border-color:rgba(128,170,255,0.65); }
+    .switch.on .knob { transform:translateX(20px); }
+
+    /* Footer layout for toggle */
+    .toggle-wrap { margin: 2rem 0 1.5rem; display: grid; place-items: center; }
   </style>
 </head>
 <body>
@@ -119,9 +185,26 @@
       <a href="projects.html">Projects</a>
       <a href="CV.html">CV</a>
       <a href="society-of-women-in-research.html">SWIR</a>
-      <a href="resume.html">Resume</a>
+      <a href="resume.html" aria-current="page">Resume</a>
     </div>
   </nav>
+
+  <!-- FLOATING SOCIAL ICONS -->
+  <div class="float-icons" aria-hidden="false">
+    <a class="float-icon fi-github" href="https://github.com/royaakrami" target="_blank" rel="noopener" aria-label="Roya’s GitHub" title="GitHub">
+      <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12.3c0 5.22 3.37 9.64 8.05 11.2.59.11.8-.26.8-.58 0-.29-.01-1.07-.02-2.1-3.27.72-3.96-1.6-3.96-1.6-.53-1.39-1.3-1.76-1.3-1.76-1.06-.75.08-.74.08-.74 1.17.08 1.78 1.22 1.78 1.22 1.04 1.82 2.72 1.29 3.39.98.11-.78.41-1.29.75-1.59-2.61-.3-5.36-1.35-5.36-6 0-1.33.47-2.42 1.24-3.27-.12-.3-.54-1.54.12-3.19 0 0 1.01-.33 3.3 1.25a11.1 11.1 0 0 1 6 0c2.28-1.58 3.29-1.25 3.29-1.25.66 1.65.24 2.89.12 3.19.77.85 1.23 1.94 1.23 3.27 0 4.66-2.75 5.7-5.37 6 .42.37.79 1.1.79 2.22 0 1.6-.02 2.89-.02 3.29 0 .32.21.7.81.58 4.67-1.56 8.04-5.98 8.04-11.2A11.5 11.5 0 0 0 12 .5z"/></svg>
+    </a>
+    <a class="float-icon fi-linkedin" href="https://www.linkedin.com/in/roya-akrami-021113246/" target="_blank" rel="noopener" aria-label="Roya’s LinkedIn" title="LinkedIn">
+      <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zM8 8h3.8v2.2h.06c.53-1 1.83-2.2 3.78-2.2 4.04 0 4.78 2.66 4.78 6.12V24h-4v-7.1c0-1.7-.03-3.88-2.36-3.88-2.36 0-2.72 1.85-2.72 3.76V24H8V8z"/></svg>
+    </a>
+    <a class="float-icon fi-email" href="mailto:roya_akrami@mines.edu" aria-label="Email Roya" title="Email">
+      <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 18V8l8 7 8-7v10H4z"/></svg>
+    </a>
+    <!-- On the Resume page, this opens the Resume PDF -->
+    <a class="float-icon fi-resume" href="files/Roya%20Akrami%20Resume%202025.pdf" target="_blank" rel="noopener" aria-label="Open Resume PDF" title="Open Resume PDF">
+      <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M8 2h6l4 4v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm6 1.5V6h2.5L14 3.5zM9 9h6v1.5H9V9zm0 3h6v1.5H9V12zm0 3h4v1.5H9V15z"/></svg>
+    </a>
+  </div>
 
   <!-- HEADER -->
   <header>
@@ -131,37 +214,68 @@
 
   <!-- ACTION BUTTONS -->
   <div class="pdf-actions">
-    <!-- Update the hrefs if you change the file path/name -->
     <a href="files/Roya%20Akrami%20Resume%202025.pdf" target="_blank" rel="noopener">Open in New Tab</a>
     <a href="files/Roya%20Akrami%20Resume%202025.pdf" download>Download PDF</a>
   </div>
 
   <!-- PDF VIEWER -->
   <main class="pdf-wrap">
-    <!-- If you keep the PDF beside this HTML file instead of /files/, use src="Roya%20Akrami%20Resume%202025.pdf" -->
     <iframe
       class="pdf-frame"
       src="files/Roya%20Akrami%20Resume%202025.pdf#toolbar=1&zoom=page-width"
       title="Roya Akrami Resume 2025 (PDF)"
     ></iframe>
 
-    <!-- Fallback link if the browser blocks inline PDFs -->
     <div class="pdf-actions" style="margin-top: 0.75rem;">
       <a href="files/Roya%20Akrami%20Resume%202025.pdf" target="_blank" rel="noopener">Having trouble? Open the PDF</a>
     </div>
   </main>
 
+  <!-- FOOTER: Floating icons toggle -->
+  <footer class="toggle-wrap">
+    <label style="display:flex; align-items:center; gap:0.6rem; user-select:none; cursor:pointer;">
+      <span class="switch">
+        <input id="toggleFloatIcons" type="checkbox" checked aria-label="Toggle floating icons">
+        <span id="toggleFloatIconsKnob" class="knob" aria-hidden="true"></span>
+      </span>
+      <span style="color:#fff; opacity:0.9;">Floating icons</span>
+    </label>
+  </footer>
+
   <script>
     function toggleMenu() {
       document.getElementById("navLinks").classList.toggle("active");
     }
+
+    // navbar hide-on-scroll (with small threshold)
     let prevScrollpos = window.pageYOffset;
-    window.onscroll = function () {
+    window.addEventListener('scroll', () => {
       const navbar = document.getElementById("navbar");
       const currentScrollPos = window.pageYOffset;
-      navbar.style.top = (prevScrollpos > currentScrollPos) ? "0" : "-70px";
+      navbar.style.top = (prevScrollpos > currentScrollPos || currentScrollPos < 10) ? "0" : "-70px";
       prevScrollpos = currentScrollPos;
-    }
+    }, { passive: true });
+
+    // floating icons toggle (persist across pages)
+    document.addEventListener('DOMContentLoaded', () => {
+      const KEY = 'floatIconsEnabled';
+      const checkbox = document.getElementById('toggleFloatIcons');
+      const track = checkbox?.closest('.switch');
+
+      function apply(on) {
+        document.body.classList.toggle('hide-float-icons', !on);
+        if (track) track.classList.toggle('on', on);
+        localStorage.setItem(KEY, String(on));
+      }
+
+      if (checkbox) {
+        const saved = localStorage.getItem(KEY);
+        const enabled = (saved === null) ? true : saved === 'true';
+        checkbox.checked = enabled;
+        apply(enabled);
+        checkbox.addEventListener('change', () => apply(checkbox.checked));
+      }
+    });
   </script>
 
 </body>
