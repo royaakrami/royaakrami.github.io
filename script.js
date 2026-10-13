@@ -132,18 +132,33 @@
   document.body.prepend(star_field);
 })();
 
-// FLOATING BUBBLES: wide drifting motion + the cursor pushes them away
+// FLOATING BUBBLES: gentle drift, and bubbles glide toward the cursor when it gets close
 (() => {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  // drift = how far (px) each bubble wanders, push = max distance the cursor shoves it,
-  // radius = how close the cursor must be to push. Raise these for a wilder feel.
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // drift = how far (px) each bubble wanders, pull = how far it can slide toward the cursor,
+  // radius = how close the cursor must be for the pull to start.
   const configs = [
-    { selector: '.bubble-home .home-nav',    drift: [34, 40], push: 170, radius: 290 },
-    { selector: '.bubble-home .name-bubble', drift: [12, 14], push: 60,  radius: 300 },
-    { selector: '.side-bubble',              drift: [4, 6],   push: 34,  radius: 150 },
-    { selector: '.enter-bubble',             drift: [22, 26], push: 100, radius: 230 }
+    { selector: '.bubble-home .home-nav',  drift: [30, 34], pull: 70, radius: 260 },
+    { selector: '.bubble-home .name-bubble', drift: [10, 12], pull: 0, radius: 1 },
+    { selector: '.side-bubble',            drift: [2, 3],   pull: 14, radius: 120 },
+    { selector: '.enter-bubble',           drift: [20, 24], pull: 60, radius: 240 }
   ];
+
+  // Toggle box: "stop icons from floating?"
+  let still = false;
+  try { still = localStorage.getItem('stillBubbles') === '1'; } catch (_) {}
+  if (document.querySelector('.bubble-link, .name-bubble')) {
+    const box = document.createElement('button');
+    box.type = 'button';
+    box.className = 'float-toggle';
+    box.setAttribute('role', 'switch');
+    box.innerHTML = '<span>stop icons from floating?</span><span class="track" aria-hidden="true"></span>';
+    const sync = () => box.setAttribute('aria-checked', String(still));
+    sync();
+    box.addEventListener('click', () => { still = !still; sync(); try { localStorage.setItem('stillBubbles', still ? '1' : '0'); } catch (_) {} });
+    document.body.appendChild(box);
+  }
+  if (reduced) return;
 
   const pointer = { x: -9999, y: -9999 };
   window.addEventListener('pointermove', (e) => { pointer.x = e.clientX; pointer.y = e.clientY; });
@@ -154,11 +169,9 @@
   const items = [];
   configs.forEach((cfg) => {
     document.querySelectorAll(cfg.selector).forEach((el) => {
-      items.push({
-        el, cfg, x: 0, y: 0, vx: 0, vy: 0,
+      items.push({ el, cfg, x: 0, y: 0, vx: 0, vy: 0,
         phaseX: Math.random() * 6.28, phaseY: Math.random() * 6.28,
-        speedX: 0.35 + Math.random() * 0.25, speedY: 0.3 + Math.random() * 0.25
-      });
+        speedX: 0.35 + Math.random() * 0.25, speedY: 0.3 + Math.random() * 0.25 });
     });
   });
   if (!items.length) return;
@@ -167,26 +180,25 @@
     const t = now / 1000;
     for (const it of items) {
       const r = it.el.getBoundingClientRect();
-      // Where the bubble would sit without any offset applied
       const baseLeft = r.left - it.x, baseTop = r.top - it.y;
       const cx = baseLeft + r.width / 2, cy = baseTop + r.height / 2;
+      let tx = 0, ty = 0;
 
-      let tx = Math.sin(t * it.speedX + it.phaseX) * it.cfg.drift[0];
-      let ty = Math.cos(t * it.speedY + it.phaseY) * it.cfg.drift[1];
-
-      const dx = cx + it.x - pointer.x, dy = cy + it.y - pointer.y;
-      const dist = Math.hypot(dx, dy) || 1;
-      if (dist < it.cfg.radius) {
-        const strength = Math.pow(1 - dist / it.cfg.radius, 1.5) * it.cfg.push;
-        tx += (dx / dist) * strength;
-        ty += (dy / dist) * strength;
+      if (!still) {
+        tx = Math.sin(t * it.speedX + it.phaseX) * it.cfg.drift[0];
+        ty = Math.cos(t * it.speedY + it.phaseY) * it.cfg.drift[1];
+        // Drift toward the cursor, stopping once it is over the bubble so it stays easy to click
+        const dx = pointer.x - (cx + it.x), dy = pointer.y - (cy + it.y);
+        const dist = Math.hypot(dx, dy) || 1;
+        if (it.cfg.pull && dist < it.cfg.radius && dist > r.width * 0.3) {
+          const strength = (1 - dist / it.cfg.radius) * it.cfg.pull;
+          tx += (dx / dist) * strength;
+          ty += (dy / dist) * strength;
+        }
       }
 
-      // Keep the bubble on screen
       tx = Math.min(Math.max(tx, 8 - baseLeft), innerWidth - 8 - (baseLeft + r.width));
       ty = Math.min(Math.max(ty, 8 - baseTop), innerHeight - 8 - (baseTop + r.height));
-
-      // Springy easing
       it.vx = (it.vx + (tx - it.x) * 0.045) * 0.86;
       it.vy = (it.vy + (ty - it.y) * 0.045) * 0.86;
       it.x += it.vx;
@@ -196,6 +208,41 @@
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+})();
+
+// NAME BUBBLE: click to flip to my photo, click again (or wait) to flip back
+(() => {
+  const bubble = document.getElementById('name-flip');
+  if (!bubble) return;
+  let timer;
+  const set = (on) => {
+    bubble.classList.toggle('flipped', on);
+    bubble.setAttribute('aria-pressed', String(on));
+    clearTimeout(timer);
+    if (on) timer = setTimeout(() => set(false), 6000);
+  };
+  bubble.addEventListener('click', () => set(!bubble.classList.contains('flipped')));
+})();
+
+// PROJECT SEARCH: filter project entries by keyword
+(() => {
+  const input = document.getElementById('proj-search');
+  if (!input) return;
+  const cards = [...document.querySelectorAll('.project-story')];
+  const count = document.getElementById('proj-count');
+  const empty = document.getElementById('proj-empty');
+  input.addEventListener('input', () => {
+    const words = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+    let shown = 0;
+    cards.forEach((c) => {
+      const text = c.textContent.toLowerCase();
+      const hit = words.every((w) => text.includes(w));
+      c.hidden = !hit;
+      if (hit) shown++;
+    });
+    empty.hidden = shown > 0;
+    count.textContent = words.length ? `${shown} of ${cards.length} projects match` : '';
+  });
 })();
 
 // PHOTO LIGHTBOX: click a photo to see it full size with its description
