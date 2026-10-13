@@ -589,3 +589,11 @@ h2 { letter-spacing: -.01em; }
 .award-link { font-size: .9rem; }
 @media (max-width: 1100px) { .page-awards .award-item { grid-template-columns: 82px minmax(0, 1fr); } }
 @media (max-width: 560px) { .page-awards .award-item { grid-template-columns: 56px minmax(0, 1fr); } }
+
+body, h1, h2, h3, .name-bubble, .intro-title, .lightbox-text h3 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+h1 { letter-spacing: -.06em; }
+h2 { letter-spacing: -.035em; }
+.name-bubble { letter-spacing: -.055em; }
+.award-item h2, .story-copy h2 { font-weight: 500; }
