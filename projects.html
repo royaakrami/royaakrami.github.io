@@ -31,7 +31,7 @@
     <main class="scroll-content list-page-content">
       <section class="page-copy content-block">
         <h1>Projects I have worked on</h1>
-        <p>Research, school, and personal projects, from NASA data pipelines to a lunar rover. Click the photos to see them close-up.</p>
+        <p>My research, school, and personal projects, from NASA data pipelines to lunar rover circuitry. Click the photos for more info!</p>
       </section>
 
       <div class="project-search content-block">
@@ -39,6 +39,42 @@
         <input id="proj-search" type="search" placeholder="Try a keyword: MATLAB, NASA, LiDAR, neural network" autocomplete="off">
         <p id="proj-count" aria-live="polite"></p>
       </div>
+
+      <div class="project-search content-block">
+  <label for="proj-search">Search projects</label>
+  <input id="proj-search" type="search" placeholder="Try a keyword: optical link, fault detection, racks, power" autocomplete="off">
+  <p id="proj-count" aria-live="polite"></p>
+</div>
+
+<section class="project-story content-block flip" id="personal-1">
+  <div
+    data-title="Optical-Link Fault Detector"
+    data-caption="Detecting unusual optical-link behavior using optical power, temperature, and error measurements."
+    class="round-photo project-circle bubble-lavender-light"
+    style="--photo:url('assets/photos/personal-1.jpg')">
+  </div>
+  <div class="story-copy">
+    <p class="project-meta">Personal project · August 2026</p>
+    <h2>Optical-Link Fault Detector</h2>
+    <p>Uses optical power, temperature, and error measurements to identify unusual behavior and flag potential link degradation.</p>
+    <p class="tools">Optical networks · Fault detection · Sensor data analysis</p>
+  </div>
+</section>
+
+<section class="project-story content-block" id="personal-2">
+  <div
+    data-title="Rack and Power Capacity Planner"
+    data-caption="Planning network equipment placement within rack space, power, and cooling limits."
+    class="round-photo project-circle bubble-lavender-light"
+    style="--photo:url('assets/photos/personal-2.jpg')">
+  </div>
+  <div class="story-copy">
+    <p class="project-meta">Personal project · August 2026</p>
+    <h2>Rack and Power Capacity Planner</h2>
+    <p>Plans the placement of network equipment in racks while accounting for space, power, and cooling limits. Flags when additional infrastructure is needed to accommodate the equipment.</p>
+    <p class="tools">Capacity planning · Power and cooling · Network infrastructure</p>
+  </div>
+</section>
 
       <section class="project-story content-block" id="exoplanet">
         <div data-title="Exoplanet transit anomaly detection" data-caption="This figure is from the NASA/Kepler mission. I can't reveal any of my own figures here that could expose data. But this is what I'm working with at NASA JPL. I have my algorithm detect anomalies within light curves like these (maps of star brightness over time)." class="round-photo project-circle bubble-sage" style="--photo:url('assets/photos/exoplanet.jpg')"></div>
@@ -83,16 +119,6 @@
       <section class="project-story content-block" id="swr">
         <div data-title="Society of Women in Research" data-caption="Society of Women in Research, which I founded at Colorado School of Mines." class="round-photo project-circle bubble-sage" style="--photo:url('assets/photos/swr.jpg')"></div>
         <div class="story-copy"><p class="project-meta">Colorado School of Mines · Feb 2025 — Present</p><h2>Society of Women in Research</h2><p>Founded and led the only organization at Mines dedicated to closing the gender gap in research participation. We run weekly meetings, cold-email workshops, and scholarship information sessions that connect female students with research opportunities. I have presented the organization to more than 100 students and parents.</p><p class="tools">Leadership · mentorship · outreach · research access</p></div>
-      </section>
-
-      <section class="project-story content-block flip" id="personal-1">
-        <div data-title="Personal project" data-caption="Placeholder: add a photo and description of a personal project." class="round-photo project-circle bubble-lavender-light" style="--photo:url('assets/photos/personal-1.jpg')"></div>
-        <div class="story-copy"><p class="project-meta">Personal project · placeholder</p><h2>Personal Project Title</h2><p>Temporary entry. Replace this with a short description of what you built, why, and what you learned.</p><p class="tools">Tools · languages · hardware</p></div>
-      </section>
-
-      <section class="project-story content-block" id="personal-2">
-        <div data-title="Personal project" data-caption="Placeholder: add a photo and description of a personal project." class="round-photo project-circle bubble-sage" style="--photo:url('assets/photos/personal-2.jpg')"></div>
-        <div class="story-copy"><p class="project-meta">Personal project · placeholder</p><h2>Another Personal Project</h2><p>Temporary entry. Replace this with a short description of the project.</p><p class="tools">Tools · languages · hardware</p></div>
       </section>
 
       <p id="proj-empty" class="proj-empty" hidden>No projects match that keyword. Try another one, like “NASA” or “MATLAB”.</p>
