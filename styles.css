@@ -573,7 +573,12 @@ h2 { letter-spacing: -.01em; }
 .project-search input { width: 100%; padding: 14px 20px; border: 1px solid var(--line); border-radius: 999px; background: var(--lavender-light); color: var(--ink); font: inherit; font-size: 1rem; }
 .project-search input:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 .project-search p { margin: 0; min-height: 1.4em; color: var(--muted); font-size: .88rem; }
-.round-photo:not(.profile-photo).logo-photo { background-color: #fff; background-size: 72%; background-repeat: no-repeat; filter: none; }
+.round-photo:not(.profile-photo).logo-photo {
+  background-color: #fff;
+  background-size: 85%;
+  background-repeat: no-repeat;
+  filter: grayscale(100%);
+}
 .round-photo::after { display: none; }
 .proj-empty { margin: 0 0 110px; color: var(--muted); font-size: 1.1rem; }
 
@@ -597,3 +602,9 @@ h1 { letter-spacing: -.06em; }
 h2 { letter-spacing: -.035em; }
 .name-bubble { letter-spacing: -.055em; }
 .award-item h2, .story-copy h2 { font-weight: 500; }
+
+/* lunabotics logo restore color when hovering */
+.round-photo:not(.profile-photo).logo-photo:hover,
+.round-photo:not(.profile-photo).logo-photo:focus-visible {
+  filter: grayscale(0%);
+}
