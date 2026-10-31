@@ -608,3 +608,10 @@ h2 { letter-spacing: -.035em; }
 .round-photo:not(.profile-photo).logo-photo:focus-visible {
   filter: grayscale(0%);
 }
+
+
+/* dont let the profile photo be clicked */
+.profile-photo {
+  cursor: default;
+  pointer-events: none;
+}
