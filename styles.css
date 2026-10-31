@@ -615,3 +615,24 @@ h2 { letter-spacing: -.035em; }
   cursor: default;
   pointer-events: none;
 }
+
+/* about page layout */
+.page-about .scroll-content {
+  padding-top: 115px;
+}
+
+/* keep profile photo and introduction side by side */
+.page-about .about-intro {
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 55px;
+  align-items: center;
+}
+
+@media (max-width: 820px) {
+  .page-about .about-intro {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+
